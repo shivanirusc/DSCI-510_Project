@@ -17,10 +17,9 @@ recipe_data = pd.read_csv("updated_recipe_data.csv")
 def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions):
     filtered_data = recipe_data.copy()
 
-    # Filter recipes based on selected ingredients
+    # Filter recipes based on input ingredients
     if ingredients:
         filtered_recipes = filtered_recipes[filtered_recipes["Ingredients"].apply(lambda x: any(ingredient in x for ingredient in ingredients))]
-    
     # Filter based on diet choices
     if "Vegetarian" in diet_choices:
         filtered_data = filtered_data[filtered_data["Recipe Category"] == "Vegetarian"]
