@@ -14,18 +14,12 @@ import pandas as pd
 recipe_data = pd.read_csv("updated_recipe_data.csv")
 
 # Define a function to filter recipes based on user inputs
-def filter_recipes(recipe_data, ingredients_input, diet_choices, user_preferences, dietary_restrictions):
+def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions):
     filtered_data = recipe_data.copy()
 
     # Filter recipes based on selected ingredients
-    if ingredients_input:
-        # Convert the list of selected ingredients into a string
-        ingredients_str = ", ".join(ingredients_input)
-        # Split the input into individual ingredient names
-        ingredients = [ingredient.strip() for ingredient in ingredients_str.split(",")]
-        # Filter recipes based on input ingredients
+    if ingredients:
         filtered_recipes = filtered_recipes[filtered_recipes["Ingredients"].apply(lambda x: any(ingredient in x for ingredient in ingredients))]
-
      # Filter based on diet choices
     if "Vegetarian" in diet_choices:
         filtered_data = filtered_data[filtered_data["Recipe Category"] == "Vegetarian"]
@@ -50,11 +44,14 @@ def filter_recipes(recipe_data, ingredients_input, diet_choices, user_preference
 # Streamlit app
 st.sidebar.title("Filter Options")
 
-# Streamlit app
-st.sidebar.title("Filter Options")
-
-# Multiselect for users to input ingredients
+# Create a multiselect widget for users to input ingredients
 ingredients_input = st.sidebar.multiselect("Select Ingredients", [])
+
+# Convert the list of selected ingredients into a string
+ingredients_str = ", ".join(ingredients_input)
+
+# Split the input into individual ingredient names
+ingredients = [ingredient.strip() for ingredient in ingredients_str.split(",")]
 
 # Multiselect for vegetarian, non-vegetarian, or vegan
 diet_choices = st.sidebar.multiselect("Choose Diet", ["Choose", "Vegetarian", "Non-Vegetarian", "Vegan"], default=["Choose"])
@@ -66,7 +63,7 @@ user_preferences = st.sidebar.multiselect("User Preferences", ["High Blood Press
 dietary_restrictions = st.sidebar.text_input("Dietary Restrictions")
 
 # Filter the data based on user inputs
-filtered_recipes = filter_recipes(recipe_data, ingredients_input, diet_choices, user_preferences, dietary_restrictions)
+filtered_recipes = filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions)
 
 # Display filtered recipes
 if st.sidebar.button("Submit"):
