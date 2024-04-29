@@ -46,12 +46,12 @@ def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, die
 # Streamlit app
 st.sidebar.title("Filter Options")
 
-# Text box to input ingredient names
-ingredients = []
-for i in range(6):
-    ingredient = st.sidebar.text_input(f"Ingredient {i+1}")
-    if ingredient:
-        ingredients.append(ingredient)
+# Multiselect for ingredients
+ingredients = st.sidebar.multiselect("Ingredients", [f"Ingredient {i+1}" for i in range(6)])
+
+# loop for appending ingredients
+ingredients = [ingredient.split()[1] for ingredient in ingredients if ingredient]
+
 
 # Multiselect for vegetarian, non-vegetarian, or vegan
 diet_choices = st.sidebar.multiselect("Choose Diet", ["Choose", "Vegetarian", "Non-Vegetarian", "Vegan"], default=["Choose"])
