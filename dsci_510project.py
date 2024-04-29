@@ -14,7 +14,7 @@ import pandas as pd
 recipe_data = pd.read_csv("updated_recipe_data.csv")
 
 # Define a function to filter recipes based on user inputs
-def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions):
+def filter_recipes(recipe_data, ingredients_input, diet_choices, user_preferences, dietary_restrictions):
     filtered_data = recipe_data.copy()
 
     # Filter recipes based on selected ingredients
@@ -66,7 +66,7 @@ user_preferences = st.sidebar.multiselect("User Preferences", ["High Blood Press
 dietary_restrictions = st.sidebar.text_input("Dietary Restrictions")
 
 # Filter the data based on user inputs
-filtered_recipes = filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions)
+filtered_recipes = filter_recipes(recipe_data, ingredients_input, diet_choices, user_preferences, dietary_restrictions)
 
 # Display filtered recipes
 if st.sidebar.button("Submit"):
