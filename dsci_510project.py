@@ -17,10 +17,16 @@ recipe_data = pd.read_csv("updated_recipe_data.csv")
 def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions):
     filtered_data = recipe_data.copy()
 
-    # Filter recipes based on input ingredients
-    if ingredients:
+    # Filter recipes based on selected ingredients
+    if ingredients_input:
+        # Convert the list of selected ingredients into a string
+        ingredients_str = ", ".join(ingredients_input)
+        # Split the input into individual ingredient names
+        ingredients = [ingredient.strip() for ingredient in ingredients_str.split(",")]
+        # Filter recipes based on input ingredients
         filtered_recipes = filtered_recipes[filtered_recipes["Ingredients"].apply(lambda x: any(ingredient in x for ingredient in ingredients))]
-    # Filter based on diet choices
+
+     # Filter based on diet choices
     if "Vegetarian" in diet_choices:
         filtered_data = filtered_data[filtered_data["Recipe Category"] == "Vegetarian"]
     if "Non-Vegetarian" in diet_choices:
@@ -44,14 +50,11 @@ def filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, die
 # Streamlit app
 st.sidebar.title("Filter Options")
 
-# Text input for users to input ingredients
-ingredients_input = st.sidebar.text_input("Enter Ingredients (comma-separated)")
+# Streamlit app
+st.sidebar.title("Filter Options")
 
-# Split the input into individual ingredient names
-ingredients = [ingredient.strip() for ingredient in ingredients_input.split(",")]
-
-# Remove any empty strings from the ingredient names
-ingredients = [ingredient for ingredient in ingredients if ingredient]
+# Multiselect for users to input ingredients
+ingredients_input = st.sidebar.multiselect("Select Ingredients", [])
 
 # Multiselect for vegetarian, non-vegetarian, or vegan
 diet_choices = st.sidebar.multiselect("Choose Diet", ["Choose", "Vegetarian", "Non-Vegetarian", "Vegan"], default=["Choose"])
