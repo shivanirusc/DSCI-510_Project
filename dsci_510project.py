@@ -72,7 +72,7 @@ user_preferences = st.sidebar.multiselect("User Preferences", ["High Blood Press
 dietary_restrictions = st.sidebar.text_input("Dietary Restrictions")
 
 # Filter the data based on user inputs
-filtered_recipes = filter_recipes(recipe_data, ingredients, diet_choices, user_preferences, dietary_restrictions)
+filtered_recipes = filter_recipes(recipe_data, selected_ingredients, diet_choices, user_preferences, dietary_restrictions)
 
 # Display filtered recipes
 if st.sidebar.button("Submit"):
