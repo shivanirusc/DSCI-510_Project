@@ -10,9 +10,9 @@ def classify_recipe(row):
         return 'Soup'
     elif 'salad' in row['Recipe Name'].lower():
         return 'Salad'
-    elif row['Ingredients'].lower().find('cup white sugar') != -1 or row['Ingredients'].lower().find('cup brown sugar') != -1:
+    elif 'cup white sugar' in row['Ingredients'].lower() or 'cup brown sugar' in row['Ingredients'].lower():
         return 'Sweet Dish'
-    elif row['Ingredients'].lower().find('fluid') != -1:
+    elif 'fluid' in row['Ingredients'].lower():
         return 'Drink'
     else:
         return 'Meal'
@@ -32,7 +32,7 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     # Filter by recipe category
     if category:
-        filtered_data = filtered_data[filtered_data['Recipe Category'].isin(category)]
+        filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(category)]
     
     # Filter by health conditions
     if health_conditions:
@@ -46,23 +46,16 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     # Filter by sweet or drink
     if sweet_or_drink:
-        if 'Sweet Dish' in sweet_or_drink:
-            filtered_data = filtered_data[filtered_data['Recipe Category'] == 'Sweet Dish']
-        if 'Drink' in sweet_or_drink:
-            filtered_data = filtered_data[filtered_data['Recipe Category'] == 'Drink']
-        if 'Meal' in sweet_or_drink:
-            filtered_data = filtered_data[filtered_data['Recipe Category'] == 'Meal']
-        if 'Soup' in sweet_or_drink:
-            filtered_data = filtered_data[filtered_data['Recipe Category'] == 'Soup']
-        if 'Salad' in sweet_or_drink:
-            filtered_data = filtered_data[filtered_data['Recipe Category'] == 'Salad']
+        filtered_data = pd.DataFrame(columns=data.columns)  # Create an empty DataFrame for filtered data
+        for category in sweet_or_drink:
+            filtered_data = pd.concat([filtered_data, data[data.apply(classify_recipe, axis=1) == category]], ignore_index=True)
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
 # Main screen inputs
 st.title("Recipe Filter")
 
-ingredient = st.text_input("Enter Key ingredient", "")
+ingredient = st.text_input("Enter an ingredient", "")
 
 allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
