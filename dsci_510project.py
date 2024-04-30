@@ -18,11 +18,11 @@ def classify_recipe(row):
         return 'Meal'
 
 # Function to filter data based on user inputs
-def filter_data(ingredients, category, health_conditions, sweet_or_drink, allergy_ingredients):
+def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients):
     filtered_data = data.copy()
     
-    # Filter by ingredients
-    for ingredient in ingredients:
+    # Filter by ingredient
+    if ingredient:
         filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(ingredient, case=False)]
     
     # Filter out recipes containing allergy ingredients
@@ -62,8 +62,7 @@ def filter_data(ingredients, category, health_conditions, sweet_or_drink, allerg
 # Main screen inputs
 st.title("Recipe Filter")
 
-ingredients = st.text_input("Enter ingredients (comma-separated)", "")
-ingredients_list = [ingredient.strip() for ingredient in ingredients.split(',')]
+ingredient = st.text_input("Enter Key ingredient", "")
 
 allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
@@ -74,5 +73,5 @@ sweet_or_drink = st.multiselect("Select sweet or drink", ["Sweet Dish", "Drink",
 
 # Filter button
 if st.button("Submit"):
-    filtered_data = filter_data(ingredients_list, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
+    filtered_data = filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
     st.table(filtered_data)
