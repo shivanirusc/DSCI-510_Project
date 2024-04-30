@@ -18,12 +18,17 @@ def classify_recipe(row):
         return 'Meal'
 
 # Function to filter data based on user inputs
-def filter_data(ingredients, category, health_conditions, sweet_or_drink):
+def filter_data(ingredients, category, health_conditions, sweet_or_drink, allergy_ingredients):
     filtered_data = data.copy()
     
     # Filter by ingredients
-    if ingredients:
-        filtered_data = filtered_data[filtered_data['Ingredients'].str.contains('|'.join(ingredients), case=False)]
+    for ingredient in ingredients:
+        filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(ingredient, case=False)]
+    
+    # Filter out recipes containing allergy ingredients
+    if allergy_ingredients:
+        for allergen in allergy_ingredients:
+            filtered_data = filtered_data[~filtered_data['Ingredients'].str.contains(allergen, case=False)]
     
     # Filter by recipe category
     if category:
@@ -54,14 +59,20 @@ def filter_data(ingredients, category, health_conditions, sweet_or_drink):
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
-# Sidebar inputs
-st.sidebar.title("Filter Options")
-ingredients = st.sidebar.text_input("Enter ingredients (comma-separated)", "")
-category = st.sidebar.multiselect("Select recipe category", ["Meal", "Soup", "Salad", "Sweet Dish", "Drink"])
-health_conditions = st.sidebar.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
-sweet_or_drink = st.sidebar.multiselect("Select sweet or drink", ["Sweet Dish", "Drink", "Meal", "Soup", "Salad"])
+# Main screen inputs
+st.title("Recipe Filter")
+
+ingredients = st.text_input("Enter ingredients (comma-separated)", "")
+ingredients_list = [ingredient.strip() for ingredient in ingredients.split(',')]
+
+allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
+allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
+
+category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
+health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
+sweet_or_drink = st.multiselect("Select sweet or drink", ["Sweet Dish", "Drink", "Meal", "Soup", "Salad"])
 
 # Filter button
-if st.sidebar.button("Submit"):
-    filtered_data = filter_data(ingredients.split(','), category, health_conditions, sweet_or_drink)
+if st.button("Submit"):
+    filtered_data = filter_data(ingredients_list, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
     st.table(filtered_data)
