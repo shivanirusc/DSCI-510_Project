@@ -51,8 +51,23 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     return filtered_data[['Recipe Name', 'Ingredients']]
 
 # Main screen inputs
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background: url('background_image.jpg');
+        background-size: cover;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("Recipe Filter")
 
+st.subheader("Enter Your Preferences")
+
+# Input fields
 ingredient = st.text_input("Enter an ingredient", "")
 allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
@@ -61,9 +76,14 @@ health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low
 sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet Dish", "Drink", "Meal", "Soup"])
 
 # Filter button
-if st.button("Submit"):
+if st.button("Find Recipes"):
+    st.subheader("Filtered Recipes")
     filtered_data = filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
     if filtered_data.empty:
         st.write("No recipes found matching the criteria.")
     else:
         st.table(filtered_data)
+
+# Footer
+st.markdown("---")
+st.markdown("Created with Streamlit") 
