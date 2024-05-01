@@ -50,14 +50,12 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
-# Set page configuration
-st.set_page_config(
-    page_title="Recipe Filter",
-    page_icon="🥦",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-    background_image='https://i.imgur.com/AUtA6b0.jpeg'
-)
+# Load background image
+background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
+
+# Display background image
+st.image(background_image, use_column_width=True)
+
 st.title("Recipe Filter")
 
 st.subheader("Enter Your Preferences")
