@@ -58,7 +58,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
     background_image='https://i.imgur.com/AUtA6b0.jpeg'
 )
-
 st.title("Recipe Filter")
 
 st.subheader("Enter Your Preferences")
