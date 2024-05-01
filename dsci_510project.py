@@ -50,18 +50,15 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
-# Main screen inputs
-st.markdown(
-    """
-    <style>
-    .reportview-container {
-        background: url('https://i.imgur.com/AUtA6b0.jpeg');
-        background-size: cover;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
+# Set page configuration
+st.set_page_config(
+    page_title="Recipe Filter",
+    page_icon="🥦",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+    background_image='https://i.imgur.com/AUtA6b0.jpeg'
 )
+
 st.title("Recipe Filter")
 
 st.subheader("Enter Your Preferences")
