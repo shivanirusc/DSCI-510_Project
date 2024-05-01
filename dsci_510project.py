@@ -56,10 +56,8 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
 st.title("Recipe Filter")
 
 ingredient = st.text_input("Enter an ingredient", "")
-
 allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
-
 category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
 health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
 sweet_or_drink = st.multiselect("Select sweet or drink", ["Sweet Dish", "Drink", "Meal", "Soup", "Salad"])
