@@ -47,8 +47,8 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     # Filter by sweet or drink
     if sweet_or_drink:
         filtered_data = pd.DataFrame(columns=data.columns)  # Create an empty DataFrame for filtered data
-        for category in sweet_or_drink:
-            filtered_data = pd.concat([filtered_data, data[data.apply(classify_recipe, axis=1) == category]], ignore_index=True)
+        for cat in sweet_or_drink:
+            filtered_data = pd.concat([filtered_data, data[data.apply(classify_recipe, axis=1) == cat]], ignore_index=True)
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
