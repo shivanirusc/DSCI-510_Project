@@ -44,11 +44,11 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
             elif condition == "Low Calorie":
                 filtered_data = filtered_data[filtered_data["Calorie"] < 100]  # Adjust threshold as needed
     
-    # Filter by sweet or drink
+    # Filter by sweet or drink or soup or meal
     if sweet_or_drink:
-        filtered_data = pd.DataFrame(columns=data.columns)  # Create an empty DataFrame for filtered data
-        for cat in sweet_or_drink:
-            filtered_data = pd.concat([filtered_data, data[data.apply(classify_recipe, axis=1) == cat]], ignore_index=True)
+        filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
+        if ingredient:
+            filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
@@ -60,7 +60,7 @@ allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (co
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
 category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
 health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
-sweet_or_drink = st.multiselect("Select sweet or drink", ["Sweet Dish", "Drink", "Meal", "Soup", "Salad"])
+sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet Dish", "Drink", "Meal", "Soup"])
 
 # Filter button
 if st.button("Submit"):
