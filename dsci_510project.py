@@ -62,7 +62,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 st.title("Recipe Filter")
 
 st.subheader("Enter Your Preferences")
