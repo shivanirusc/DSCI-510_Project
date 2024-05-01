@@ -47,8 +47,6 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     # Filter by sweet or drink or soup or meal
     if sweet_or_drink:
         filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
-        if ingredient:
-            filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
@@ -65,4 +63,7 @@ sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet
 # Filter button
 if st.button("Submit"):
     filtered_data = filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
-    st.table(filtered_data)
+    if filtered_data.empty:
+        st.write("No recipes found matching the criteria.")
+    else:
+        st.table(filtered_data)
