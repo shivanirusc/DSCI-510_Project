@@ -32,7 +32,7 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     # Filter by recipe category
     if category:
-        filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(category)]
+        filtered_data = filtered_data[filtered_data["Recipe Category"].isin(category)]
     
     # Filter by health conditions
     if health_conditions:
