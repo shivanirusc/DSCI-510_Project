@@ -55,7 +55,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('food-photgraphy-tips.webp');
+        background: url('https://github.com/shivanirusc/DSCI-510_Project/blob/main/TOP-5-RESTAURANT-FOOD-PHOTOGRAPHY-TIPS.jpg');
         background-size: cover;
     }
     </style>
