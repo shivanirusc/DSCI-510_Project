@@ -55,7 +55,7 @@ st.markdown(
     """
     <style>
     .reportview-container {
-        background: url('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shopify.com%2Fid%2Fblog%2Ffood-photography-tips&psig=AOvVaw3tIV6We4GWCpKYQSk8AySE&ust=1714685866882000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPiXo4W17YUDFQAAAAAdAAAAABAE');
+        background: url('food-photgraphy-tips.webp');
         background-size: cover;
     }
     </style>
