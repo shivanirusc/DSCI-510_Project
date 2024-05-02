@@ -104,13 +104,6 @@ for condition, filter_condition in conditions.items():
     for i, category in enumerate(recipe_categories):
         recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
 
-    # Plot bar chart with custom styling
-    with st.markdown(f"### Recipes for {condition} condition"):
-        fig, ax = plt.subplots()
-        ax.bar(recipe_categories, recipe_counts, color='skyblue', edgecolor='black')
-        ax.set_ylabel("Recipe Count")
-        ax.set_xlabel("Recipe Category")
-        ax.set_title(f"Recipes for {condition} condition")
-        ax.tick_params(axis='x', rotation=45)
-        st.pyplot(fig)
-
+    # Plot bar chart
+    st.write(f"### Recipes for {condition} condition:")
+    st.bar_chart({category: count for category, count in zip(recipe_categories, recipe_counts)})
