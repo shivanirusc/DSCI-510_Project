@@ -1,8 +1,8 @@
-import streamlit as st
-import pandas as pd
 import matplotlib
 matplotlib.use('TkAgg')  # Set the backend to Agg (Agg is a non-interactive backend)
 import matplotlib.pyplot as plt
+import streamlit as st
+import pandas as pd
 
 # Load the data
 data = pd.read_csv("updated_recipe_data.csv")
