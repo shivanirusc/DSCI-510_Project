@@ -6,7 +6,7 @@ import streamlit as st
 
 # Define the text data
 submission_text = """
-**DSCI 510: Spring 2024 Final Project Submission**
+<h1><b>DSCI 510: Spring 2024 Final Project Submission</b></h1>
 
 **1. The name of team member:**
 
