@@ -90,17 +90,20 @@ conditions = {
 def custom_bar_chart(data_dict):
     for key, value in data_dict.items():
         st.write(f"### {key} condition:")
-        # Add CSS for styling
-        st.markdown(f"""
-            <style>
-            .st-df[data-testid="stHorizontalBarChart"] tr:nth-child(odd) {{
-                background-color: #f0f0f0 !important;
-            }}
-            .st-df[data-testid="stHorizontalBarChart"] tr:nth-child(even) {{
-                background-color: #ffffff !important;
-            }}
-            </style>
-            """, unsafe_allow_html=True)
+        # Define the CSS styling as a string
+        custom_css = """
+        <style>
+        .stHorizontalBarChart > div > div > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) {
+        background-color: #f0f0f0 !important;
+        }
+        .stHorizontalBarChart > div > div > div > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(1) {
+        background-color: #ffffff !important;
+        }
+        </style>
+        """
+
+        # Use the html component to inject the CSS styling
+        st.html(custom_css)
         # Plot bar chart
         st.bar_chart(value)
 
