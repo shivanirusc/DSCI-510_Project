@@ -1,6 +1,7 @@
-import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
 
 # Load the data
 data = pd.read_csv("updated_recipe_data.csv")
@@ -81,10 +82,10 @@ if st.button("Find Recipes"):
 # Filter data for High Blood Pressure condition and selected categories
 condition = "High Blood Pressure"
 categories = ["Vegetarian", "Non-vegetarian", "Vegan"]
-filtered_data = data[(data["Health Condition"] == condition) & (data["Recipe Category"].isin(categories))]
+new_data = data[(data["Sodium"] < 150) & (data["Recipe Category"].isin(categories))]
 
 # Count recipes for each category
-recipe_counts = filtered_data["Recipe Category"].value_counts()
+recipe_counts = new_data["Recipe Category"].value_counts()
 
 # Draw pie plot
 fig, ax = plt.subplots()
@@ -93,4 +94,3 @@ ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 
 # Display the plot
 st.pyplot(fig)
-
