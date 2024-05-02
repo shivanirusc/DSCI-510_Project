@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib
-matplotlib.use('Agg') 
-import matplotlib.pyplot as plt
+import numpy as np
 
 # Load the data
 data = pd.read_csv("updated_recipe_data.csv")
@@ -80,18 +78,32 @@ if st.button("Find Recipes"):
     else:
         st.table(filtered_data)
 
-# Filter data for High Blood Pressure condition and selected categories
-condition = "High Blood Pressure"
-categories = ["Vegetarian", "Non-vegetarian", "Vegan"]
-new_data = data[(data["Sodium"] < 150) & (data["Recipe Category"].isin(categories))]
+# Conditions
+conditions = {
+    "High Blood Pressure": "Sodium < 150",
+    "Diabetes": "Total Carbohydrate < 30",
+    "Low Calorie": "Calorie < 100",
+    "Low Blood Pressure": "Cholesterol < 150"
+}
 
-# Count recipes for each category
-recipe_counts = new_data["Recipe Category"].value_counts()
+# Plot bar charts for each condition
+for condition, filter_condition in conditions.items():
+    # Filter data based on condition
+    if condition == "High Blood Pressure":
+        filtered_data = data[data["Sodium"] < 150]
+    elif condition == "Diabetes":
+        filtered_data = data[data["Total Carbohydrate"] < 30]
+    elif condition == "Low Calorie":
+        filtered_data = data[data["Calorie"] < 100]
+    elif condition == "Low Blood Pressure":
+        filtered_data = data[data["Cholesterol"] < 150]
 
-# Draw pie plot
-fig, ax = plt.subplots()
-ax.pie(recipe_counts, labels=recipe_counts.index, autopct='%1.1f%%', startangle=90)
-ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    # Count recipes for each category
+    recipe_categories = filtered_data["Recipe Category"].unique()
+    recipe_counts = np.zeros(len(recipe_categories))
+    for i, category in enumerate(recipe_categories):
+        recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
 
-# Display the plot
-st.pyplot(fig)
+    # Plot bar chart
+    st.write(f"Recipes for {condition} condition:")
+    st.bar_chart({recipe_categories[i]: recipe_counts[i] for i in range(len(recipe_categories))})
