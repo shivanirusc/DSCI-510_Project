@@ -86,6 +86,24 @@ conditions = {
     "Low Blood Pressure": "Cholesterol < 150"
 }
 
+# Function to create bar chart with custom styling
+def custom_bar_chart(data_dict):
+    for key, value in data_dict.items():
+        st.write(f"### {key} condition:")
+        # Add CSS for styling
+        st.markdown(f"""
+            <style>
+            .st-df[data-testid="stHorizontalBarChart"] tr:nth-child(odd) {{
+                background-color: #f0f0f0 !important;
+            }}
+            .st-df[data-testid="stHorizontalBarChart"] tr:nth-child(even) {{
+                background-color: #ffffff !important;
+            }}
+            </style>
+            """, unsafe_allow_html=True)
+        # Plot bar chart
+        st.bar_chart(value)
+
 # Plot bar charts for each condition
 for condition, filter_condition in conditions.items():
     # Filter data based on condition
@@ -104,6 +122,8 @@ for condition, filter_condition in conditions.items():
     for i, category in enumerate(recipe_categories):
         recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
 
-    # Plot bar chart
-    st.write(f"### Recipes for {condition} condition:")
-    st.bar_chart({category: count for category, count in zip(recipe_categories, recipe_counts)})
+    # Create data dictionary for bar chart
+    data_dict = {category: count for category, count in zip(recipe_categories, recipe_counts)}
+
+    # Plot bar chart with custom styling
+    custom_bar_chart({condition: data_dict})
