@@ -48,7 +48,7 @@ Upon submission of these preferences, the app generates a list of 10 recipes alo
 """
 
 # Render the text in Streamlit app
-st.markdown(submission_text)
+st.markdown(submission_text,unsafe_allow_html=True)
 
 
 # Load the data
