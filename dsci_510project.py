@@ -57,7 +57,6 @@ graph_one = """
 
 The plot visualizes the number of recipes available for different health conditions, providing insights into the distribution of recipes based on specific health criteria. 
 """
-st.markdown(graph_one, unsafe_allow_html=True)
 # Define conditions
 conditions = {
     "High Blood Pressure": data[data["Sodium"] < 150],
@@ -76,7 +75,7 @@ recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition
 colors = px.colors.qualitative.Plotly
 
 # Plotly chart with custom colors
-fig = px.bar(recipe_counts_df, x="Health Condition", title=" ", y="Recipe Count",
+fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions",
              color="Condition", color_discrete_sequence=colors)
 fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
 
