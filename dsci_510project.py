@@ -135,6 +135,6 @@ st.title("Recipe Filter")
 # Button to open the recipe filter app
 if st.button("Open Recipe Filter App"):
     st.markdown("Loading...")
-    url = "https://recipefilterapp.streamlit.app/"
+    url = "https://share.streamlit.io/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
     components.iframe(url)
     # url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
