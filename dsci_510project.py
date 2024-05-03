@@ -128,6 +128,12 @@ for condition, filter_condition in conditions.items():
         ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
         st.pyplot(fig)
 
+import streamlit as st
+import pandas as pd
+
+# Load data
+data = pd.read_csv("updated_recipe_data.csv")
+
 # Function to classify recipe categories
 def classify_recipe(row):
     if 'soup' in row['Recipe Name'].lower():
@@ -174,113 +180,35 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
     
     return filtered_data[['Recipe Name', 'Ingredients']]
 
-# Load background image
-background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
-
-# Display background image
-st.image(background_image, use_column_width=True)
-
-st.title("Recipe Filter")
-
-st.subheader("Enter Your Preferences")
-
-# Input fields
-ingredient = st.text_input("Enter an ingredient", "")
-allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
-allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
-category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
-health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
-sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet Dish", "Drink", "Meal", "Soup"])
-
-# Filter button
-if st.button("Find Recipes"):
-    st.subheader("Filtered Recipes")
-    filtered_data = filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
-    if filtered_data.empty:
-        st.write("No recipes found matching the criteria.")
-    else:
-        st.table(filtered_data)
-
-# Conditions
-conditions = {
-    "High Blood Pressure": "Sodium < 150",
-    "Diabetes": "Total Carbohydrate < 30",
-    "Low Calorie": "Calorie < 100",
-    "Low Blood Pressure": "Cholesterol < 150"
-}
-
-# Function to create bar chart with custom styling
-def custom_bar_chart(data_dict):
-    for key, value in data_dict.items():
-        st.write(f"### {key} condition:")
-        # Define the CSS styling as a string
-        custom_css = """
-        <style>
-        .stHorizontalBarChart > div > div > div > div:nth-child(1) > div > div:nth-child(1) > div:nth-child(1) {
-        background-color: #f0f0f0 !important;
-        }
-        .stHorizontalBarChart > div > div > div > div:nth-child(1) > div > div:nth-child(2) > div:nth-child(1) {
-        background-color: #ffffff !important;
-        }
-        </style>
-        """
-
-        # Use the html component to inject the CSS styling
-        st.html(custom_css)
-        # Plot bar chart
-        st.bar_chart(value)
-
-# Plot bar charts for each condition
-for condition, filter_condition in conditions.items():
-    # Filter data based on condition
-    if condition == "High Blood Pressure":
-        filtered_data = data[data["Sodium"] < 150]
-    elif condition == "Diabetes":
-        filtered_data = data[data["Total Carbohydrate"] < 30]
-    elif condition == "Low Calorie":
-        filtered_data = data[data["Calorie"] < 100]
-    elif condition == "Low Blood Pressure":
-        filtered_data = data[data["Cholesterol"] < 150]
-
-    # Count recipes for each category
-    recipe_categories = filtered_data["Recipe Category"].unique()
-    recipe_counts = np.zeros(len(recipe_categories))
-    for i, category in enumerate(recipe_categories):
-        recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
-
-    # Create data dictionary for bar chart
-    data_dict = {category: count for category, count in zip(recipe_categories, recipe_counts)}
-
-    # Plot bar chart with custom styling
-    custom_bar_chart({condition: data_dict})
+# Define the main function to run the app
 def main():
-    # Check if session state has been initialized
-    if "show_screen1" not in st.session_state:
-        st.session_state.show_screen1 = True
+    # Load background image
+    background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
 
-    # Define the function for the main screen
-    def main_screen():
-        st.write("This is the main screen.")
-        # Button to navigate to the other screen
-        if st.button("Go to Other Screen"):
-            st.session_state.show_screen1 = not st.session_state.show_screen1
+    # Display background image
+    st.image(background_image, use_column_width=True)
 
-    # Define the function for the other screen
-    def other_screen():
-        st.write("This is the other screen.")
-        # Button to navigate back to the main screen
-        if st.button("Go Back"):
-            st.session_state.show_screen1 = not st.session_state.show_screen1
+    st.title("Recipe Filter")
+    st.subheader("Enter Your Preferences")
 
-    # Main function to run the app
-    def run_app():
-        if st.session_state.show_screen1:
-            main_screen()
+    # Input fields
+    ingredient = st.text_input("Enter an ingredient", "")
+    allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
+    allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
+    category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
+    health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
+    sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet Dish", "Drink", "Meal", "Soup"])
+
+    # Filter button
+    if st.button("Find Recipes"):
+        st.subheader("Filtered Recipes")
+        filtered_data = filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients_list)
+        if filtered_data.empty:
+            st.write("No recipes found matching the criteria.")
         else:
-            other_screen()
+            st.table(filtered_data)
 
-    # Run the app
-    run_app()
-
-if __name__ == "__main__":
+# Create a button to open the filtering screen
+if st.button("Open Recipe Filter Screen"):
     main()
+
