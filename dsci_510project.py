@@ -4,6 +4,10 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
+# Add sidebar menu for navigation
+menu = ["Main", "New", "Dataset Description"]  # Add "Dataset Description" option
+choice = st.sidebar.selectbox("Go to", menu)
+
 # Define function for the new tab
 def dataset_description():
     st.title("Dataset Description")
