@@ -223,7 +223,7 @@ if choice == "Main":
   st.markdown("""
   #### **5. Difficulties Encountered in Completing the Project**
 
-  I didn't encounter any specific difficulties in completing the project. However, I can imagine that some potential challenges might arise when dealing with data preprocessing, especially if the dataset is large or messy. Additionally, ensuring the accuracy and effectiveness of the filtering conditions for different health conditions could require some trial and error. Finally, integrating and deploying the Streamlit app might pose some challenges, especially if there are compatibility issues or if additional configurations are needed.
+  I did not encounter any specific difficulties in completing the project. However, I can imagine that some potential challenges might arise when dealing with data preprocessing, especially if the dataset is large or messy. Additionally, ensuring the accuracy and effectiveness of the filtering conditions for different health conditions could require some trial and error. Finally, integrating and deploying the Streamlit app might pose some challenges, especially if there are compatibility issues or if additional configurations are needed.
 
   #### **6. What skills did you wish you had while you were doing the project?**
 
