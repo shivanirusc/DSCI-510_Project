@@ -55,52 +55,52 @@ def plot_graph_two(conditions, data, colors):
             st.pyplot(fig)
 
 # Function to classify recipe categories
-    def classify_recipe(row):
-        # Check if the recipe name contains keywords to classify it into a category
-        if 'soup' in row['Recipe Name'].lower():
-            return 'Soup'
-        elif 'salad' in row['Recipe Name'].lower():
-            return 'Salad'
-        elif 'cup white sugar' in row['Ingredients'].lower() or 'cup brown sugar' in row['Ingredients'].lower():
-            return 'Sweet Dish'
-        elif 'fluid' in row['Ingredients'].lower():
-            return 'Drink'
-        else:
-            return 'Meal'
+def classify_recipe(row):
+    # Check if the recipe name contains keywords to classify it into a category
+    if 'soup' in row['Recipe Name'].lower():
+        return 'Soup'
+    elif 'salad' in row['Recipe Name'].lower():
+        return 'Salad'
+    elif 'cup white sugar' in row['Ingredients'].lower() or 'cup brown sugar' in row['Ingredients'].lower():
+        return 'Sweet Dish'
+    elif 'fluid' in row['Ingredients'].lower():
+        return 'Drink'
+    else:
+        return 'Meal'
 
-    # Function to filter data based on user inputs
-    def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients):
-        # Make a copy of the original data
-        filtered_data = data.copy()
+# Function to filter data based on user inputs
+def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients):
+    # Make a copy of the original data
+    filtered_data = data.copy()
     
-        # Filter by ingredient
-        if ingredient:
-            filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
+    # Filter by ingredient
+    if ingredient:
+        filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
     
-        # Filter out recipes containing allergy ingredients
-        if allergy_ingredients:
-            for allergen in allergy_ingredients:
-                filtered_data = filtered_data[~filtered_data['Ingredients'].str.contains(allergen.strip(), case=False)]
+    # Filter out recipes containing allergy ingredients
+    if allergy_ingredients:
+        for allergen in allergy_ingredients:
+            filtered_data = filtered_data[~filtered_data['Ingredients'].str.contains(allergen.strip(), case=False)]
     
-        # Filter by recipe category
-        if category:
-            filtered_data = filtered_data[filtered_data["Recipe Category"].isin(category)]
+    # Filter by recipe category
+    if category:
+        filtered_data = filtered_data[filtered_data["Recipe Category"].isin(category)]
     
-        # Filter by health conditions
-        if health_conditions:
-            for condition in health_conditions:
-                if condition == "High Blood Pressure":
-                    filtered_data = filtered_data[filtered_data["Sodium"] < 150]  # Adjust threshold as needed
-                elif condition == "Diabetes":
-                    filtered_data = filtered_data[filtered_data["Total Carbohydrate"] < 30]  # Adjust threshold as needed
-                elif condition == "Low Calorie":
-                    filtered_data = filtered_data[filtered_data["Calorie"] < 100]  # Adjust threshold as needed
+    # Filter by health conditions
+    if health_conditions:
+        for condition in health_conditions:
+            if condition == "High Blood Pressure":
+                filtered_data = filtered_data[filtered_data["Sodium"] < 150]  # Adjust threshold as needed
+            elif condition == "Diabetes":
+                filtered_data = filtered_data[filtered_data["Total Carbohydrate"] < 30]  # Adjust threshold as needed
+            elif condition == "Low Calorie":
+                filtered_data = filtered_data[filtered_data["Calorie"] < 100]  # Adjust threshold as needed
     
-        # Filter by sweet or drink or soup or meal
-        if sweet_or_drink:
-            filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
+    # Filter by sweet or drink or soup or meal
+    if sweet_or_drink:
+        filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
     
-        return filtered_data[['Recipe Name', 'Ingredients']]
+    return filtered_data[['Recipe Name', 'Ingredients']]
 
 # Add sidebar menu for navigation
 menu = ["Main", "Recipe Finder", "Dataset Description"]  # Add "Dataset Description" option
