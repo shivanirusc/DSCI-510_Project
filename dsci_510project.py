@@ -156,7 +156,7 @@ if st.button("Open Recipe Filter App"):
 
     # Import the Streamlit app file from GitHub
     import urllib.request
-    url = "https://raw.githubusercontent.com/yourusername/yourrepository/recipe_filter_app.py"
+    url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
     response = urllib.request.urlopen(url)
     code = response.read().decode()
 
