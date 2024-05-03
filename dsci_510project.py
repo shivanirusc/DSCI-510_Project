@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import matplotlib.pyplot as plt
 
 # Define the text data
 submission_text = """
@@ -83,6 +84,42 @@ fig.update_layout(xaxis_title="Health Condition", yaxis_title="Number of Recipes
 
 # Display the chart
 st.plotly_chart(fig)
+
+# Conditions
+conditions = {
+    "High Blood Pressure": "Sodium < 150",
+    "Diabetes": "Total Carbohydrate < 30",
+    "Low Calorie": "Calorie < 100",
+    "Low Blood Pressure": "Cholesterol < 150"
+}
+
+# Plot bar charts for each condition
+for condition, filter_condition in conditions.items():
+    # Filter data based on condition
+    if condition == "High Blood Pressure":
+        filtered_data = data[data["Sodium"] < 150]
+    elif condition == "Diabetes":
+        filtered_data = data[data["Total Carbohydrate"] < 30]
+    elif condition == "Low Calorie":
+        filtered_data = data[data["Calorie"] < 100]
+    elif condition == "Low Blood Pressure":
+        filtered_data = data[data["Cholesterol"] < 150]
+
+    # Count recipes for each category
+    recipe_categories = filtered_data["Recipe Category"].unique()
+    recipe_counts = np.zeros(len(recipe_categories))
+    for i, category in enumerate(recipe_categories):
+        recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
+
+    # Plot bar chart with custom styling
+    with st.markdown(f"### Recipes for {condition} condition"):
+        fig, ax = plt.subplots()
+        ax.bar(recipe_categories, recipe_counts, color='skyblue', edgecolor='black')
+        ax.set_ylabel("Recipe Count")
+        ax.set_xlabel("Recipe Category")
+        ax.set_title(f"Recipes for {condition} condition")
+        ax.tick_params(axis='x', rotation=45)
+        st.pyplot(fig)
 
 # Function to classify recipe categories
 def classify_recipe(row):
