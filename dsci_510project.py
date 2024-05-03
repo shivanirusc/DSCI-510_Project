@@ -193,7 +193,7 @@ URL for website or API: https://www.kaggle.com/datasets/hugodarwood/epirecipes/d
 
 The Epicurious dataset contains a collection of recipes along with their ratings and nutrition information. It includes details such as recipe titles, ingredients, preparation methods, cooking time, ratings, and nutritional content. This dataset is suitable for various culinary analyses, recipe recommendation systems, and nutritional studies.
 
-- #### **DATA SOURCE 2:**
+- **DATA SOURCE 2:**
 **API: Spoonacular API**
 
 URL for API documentation: https://spoonacular.com/food-api/docs
@@ -202,7 +202,7 @@ URL for API documentation: https://spoonacular.com/food-api/docs
 
 The Spoonacular API provides access to a range of food-related data, including ingredients, nutrition information, and more. It offers endpoints for searching and retrieving recipe information, analyzing recipes for nutrition. The API covers a wide variety of cuisines and dietary preferences, making it suitable for various food-related applications and analysis.
 
-- #### **DATA SOURCE 3:**
+- **DATA SOURCE 3:**
 
 URL for website to scrape or download: https://www.allrecipes.com/search
 
