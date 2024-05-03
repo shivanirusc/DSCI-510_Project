@@ -1,8 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
-import streamlit as st
+import plotly.express as px
 
 # Define the text data
 submission_text = """
@@ -50,9 +49,29 @@ st.markdown(submission_text,unsafe_allow_html=True)
 st.markdown(team_member_text, unsafe_allow_html=True)
 st.markdown(explanation_text, unsafe_allow_html=True)
 
-
-# Load the data
+# Load the CSV data
 data = pd.read_csv("updated_recipe_data.csv")
+
+# Define conditions
+conditions = {
+    "High Blood Pressure": data[data["Sodium"] < 150],
+    "Diabetes": data[data["Total Carbohydrate"] < 30],
+    "Low Calorie": data[data["Calorie"] < 100],
+    "Low Blood Pressure": data[data["Cholesterol"] < 150]
+}
+
+# Count the number of recipes for each condition
+recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
+
+# Create a DataFrame from the recipe counts
+recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition", "Recipe Count"])
+
+# Plotly chart
+fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions")
+fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
+
+# Display the chart
+st.plotly_chart(fig)
 
 # Function to classify recipe categories
 def classify_recipe(row):
