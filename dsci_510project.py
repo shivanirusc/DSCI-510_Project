@@ -20,7 +20,10 @@ This project requires the following packages:
 - numpy, pandas, streamlit, requests, re (Python RegEx), plotly, matplotlib and beautifulsoup (python version: 3.11.5)  
 To visualize this project, ensure that the required packages mentioned above are installed. Next, clone the repository from the following [GitHub Repository](https://github.com/shivanirusc/DSCI-510_Project). Once the repository is cloned, execute this notebook to visualize the project.  
 You can use `allrecipe_scrapper.py`, `epicurious_data.py`, and `spoonacular_data.py` added separately to the GitHub repository to check their functions and scrap all data, or alternatively, you can directly use the CSV dataset stored in `updated_recipe_data.csv` to test the results.
-
+If you want to generate the datset form the python file
+- Firstly execute allrecipe_scrapper.py it will generate recipes csv file. 
+- Use this csv file and execute epicurious_data.py. It will applend the extracted data to the csv file
+- Finally execute spoonacular_data.py upload the recipes csv file and the code will append results to this file and give use final csv file that can be used for running the webapp.
 #### **2. Any major “gotchas” to the code?**
 The API key utilized to access the Spoonacular API is unique to my account. Therefore, if someone wishes to use this program, they must generate their own Rapid API Key. The link to obtain the key is provided: [RapidAPI](https://rapidapi.com/spoonacular/api/recipe-food-nutrition). Please note that the free version of the API allows only 50 requests.  
 The scope of the research is currently limited to examining health conditions such as High and Low Blood Pressure, Diabetes, or Low-calorie diets. However, there is potential to expand the research by including additional health issues for more comprehensive results.  
