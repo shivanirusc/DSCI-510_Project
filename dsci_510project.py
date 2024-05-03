@@ -151,6 +151,7 @@ Instructions for using the app:
 - Choose any relevant health conditions.
 - Select the type of meal.
 - Click the submit button to view the results.
+
 Click on Recipe Finder to open the app""")
 
 # Add a hyperlink to open the new app in a new page
