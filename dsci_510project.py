@@ -72,19 +72,22 @@ conditions = {
 # Count the number of recipes for each condition
 recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
 
-# Create a DataFrame from the recipe counts
-recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition", "Recipe Count"])
+# Extract conditions and counts
+conditions = list(recipe_counts.keys())
+recipe_counts = list(recipe_counts.values())
 
 # Define colors for each condition
-colors = px.colors.qualitative.Plotly
+colors = ["skyblue", "salmon", "lightgreen", "orange"]  # You can define custom colors if needed
 
-# Plotly chart with custom colors
-fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title=" ",
-             color="Condition", color_discrete_sequence=colors)
-fig.update_layout(xaxis_title="Health Condition", yaxis_title="Number of Recipes")
-
-# Display the chart
-st.plotly_chart(fig)
+# Plot
+with st.markdown("### Number of Recipes for Different Health Conditions"):
+    fig, ax = plt.subplots()
+    ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
+    ax.set_xlabel("Health Condition")
+    ax.set_ylabel("Number of Recipes")
+    ax.set_title(" ")
+    ax.grid(True)
+    st.pyplot(fig)
 
 # Conditions
 conditions = {
