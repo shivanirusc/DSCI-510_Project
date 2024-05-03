@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load data
 data = pd.read_csv("updated_recipe_data.csv")
+
+st.title("Recipe Filter")
 
 # Function to classify recipe categories
 def classify_recipe(row):
@@ -57,8 +57,6 @@ background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
 
 # Display background image
 st.image(background_image, use_column_width=True)
-
-st.title("Recipe Filter")
 
 st.subheader("Enter Your Preferences")
 
