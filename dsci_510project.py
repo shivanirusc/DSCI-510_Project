@@ -88,6 +88,18 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     ax.set_title(" ")
     st.pyplot(fig)
 
+st.markdown("""
+## Description:
+This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
+
+- **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
+- **Diabetes:** The second bar chart illustrates the number of recipes suitable for individuals with diabetes.
+- **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
+- **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
+
+Each bar's height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
+""")
+
 # Conditions
 conditions = {
     "High Blood Pressure": "Sodium < 150",
@@ -118,10 +130,7 @@ for condition, filter_condition in conditions.items():
         recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
 
     # Plot bar chart with custom styling
-    with st.markdown(f"### {condition}"):
-        st.markdown(f"The first bar chart shows the number of recipes recommended for individuals with {condition.lower()}. "
-                    "The x-axis represents different recipe categories (e.g., Soup, Salad, Main Course), and the y-axis "
-                    "represents the count of recipes. Each bar's color corresponds to a specific recipe category.")
+    with st.markdown(f"### Recipes for {condition} condition"):
         fig, ax = plt.subplots()
         ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
         ax.set_ylabel("Recipe Count")
