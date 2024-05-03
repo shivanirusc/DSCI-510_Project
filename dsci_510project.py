@@ -66,8 +66,12 @@ recipe_counts = {condition: len(filtered_data) for condition, filtered_data in c
 # Create a DataFrame from the recipe counts
 recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition", "Recipe Count"])
 
-# Plotly chart
-fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions")
+# Define colors for each condition
+colors = px.colors.qualitative.Plotly
+
+# Plotly chart with custom colors
+fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions",
+             color="Condition", color_discrete_sequence=colors)
 fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
 
 # Display the chart
