@@ -114,9 +114,14 @@ if choice == "Main":
   team_member_text = """
   ### **Name: Shivani Rajesh Shinde**  
   """
-
+  # Title of the Writeup
+  st.markdown(submission_text, unsafe_allow_html=True)
+    
+  # Name of the student
+  st.markdown(team_member_text, unsafe_allow_html=True)
+    
   # Explanation of how to use the web app, Any major “gotchas” to the code? and What did you set out to study?
-  explanation_text = """
+  st.markdown("""
   #### **1. An explanation of how to use my webapp:**  
   This project requires the following packages:
   - numpy, pandas, streamlit, requests, re (Python RegEx), plotly, matplotlib, JSON and beautifulsoup (python version: 3.11.5)  
@@ -148,14 +153,7 @@ if choice == "Main":
   - Click the submit button to view the results.
 
   ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar
-      """
-
-  # Title of the Writeup
-  st.markdown(submission_text, unsafe_allow_html=True)
-  # Name of the student
-  st.markdown(team_member_text, unsafe_allow_html=True)
-  # Explanation of how to use the web app
-  st.markdown(explanation_text, unsafe_allow_html=True)
+      """)
   
   # Add a hyperlink to open the Recipe Finder app
   st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
@@ -177,12 +175,11 @@ if choice == "Main":
   """)
 
   # Explanation text for the first graph
-  graph_one = """
+  st.markdown("""
   ##### **1. Number of Recipes for Different Conditions**
 
   The plot visualizes the number of recipes available for different health conditions, providing insights into the distribution of recipes based on specific health criteria. 
-  """
-  st.markdown(graph_one, unsafe_allow_html=True)
+  """)
 
   # Define conditions and filter the data accordingly
   graph_one_conditions = {
@@ -198,14 +195,6 @@ if choice == "Main":
   # Call to plot the bar chart for recipe counts
   plot_graph_one(graph_one_conditions, data, colors)
       
-  # Conditions for the second graph
-  graph_two_conditions = {
-      "High Blood Pressure": "Sodium < 150",
-      "Diabetes": "Total Carbohydrate < 30",
-      "Low Calorie": "Calorie < 100",
-     "Low Blood Pressure": "Cholesterol < 150"
-  }
-
   # Explanation text for the second graph
   st.markdown("""
   ##### 2. Recipe categories based on Health conditions 
@@ -218,7 +207,15 @@ if choice == "Main":
 
   Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
   """)
-  
+
+  # Conditions for the second graph
+  graph_two_conditions = {
+      "High Blood Pressure": "Sodium < 150",
+      "Diabetes": "Total Carbohydrate < 30",
+      "Low Calorie": "Calorie < 100",
+     "Low Blood Pressure": "Cholesterol < 150"
+  }
+
   # Call for ploting Recipe categories based on Health conditions charts
   plot_graph_two(graph_two_conditions, data, colors)   
 
