@@ -62,7 +62,7 @@ st.subheader("Enter Your Preferences")
 
 # Input fields
 ingredient = st.text_input("Enter an ingredient", "")
-allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (comma-separated)", "")
+allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (Enter None if no restricted ingredients)", "")
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
 category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
 health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
