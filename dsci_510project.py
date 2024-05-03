@@ -128,12 +128,6 @@ for condition, filter_condition in conditions.items():
         ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
         st.pyplot(fig)
 
-import streamlit as st
-import pandas as pd
-
-# Load data
-data = pd.read_csv("updated_recipe_data.csv")
-
 # Function to classify recipe categories
 def classify_recipe(row):
     if 'soup' in row['Recipe Name'].lower():
@@ -182,12 +176,6 @@ def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy
 
 # Define the main function to run the app
 def main():
-    # Load background image
-    background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
-
-    # Display background image
-    st.image(background_image, use_column_width=True)
-
     st.title("Recipe Filter")
     st.subheader("Enter Your Preferences")
 
@@ -208,7 +196,6 @@ def main():
         else:
             st.table(filtered_data)
 
-# Create a button to open the filtering screen
-if st.button("Open Recipe Filter Screen"):
-    main()
-
+# Create a button to open the filtering screen on a new page
+if st.button("Open Recipe Filter Screen on New Page"):
+    st.markdown('<a href="/apps/recipe_filter" target="_blank">Click here to open the Recipe Filter screen on a new page</a>', unsafe_allow_html=True)
