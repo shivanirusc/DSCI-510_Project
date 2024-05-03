@@ -4,6 +4,24 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
+# Define a function to plot the bar chart for recipe counts
+def plot_graph_one(conditions, data, colors):
+    # Count the number of recipes for each condition
+    recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
+
+    # Extract conditions and counts
+    conditions = list(recipe_counts.keys())
+    recipe_counts = list(recipe_counts.values())
+
+    # Plot the bar chart
+    with st.markdown("### Number of Recipes for Different Health Conditions"):
+        fig, ax = plt.subplots()
+        ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
+        ax.set_xlabel("Health Condition")
+        ax.set_ylabel("Number of Recipes")
+        ax.set_title(" ")
+        st.pyplot(fig)
+
 # Define a function to plot bar charts for each condition
 def plot_graph_two(conditions, data, colors):
     for condition, filter_condition in conditions.items():
@@ -119,34 +137,21 @@ if choice == "Main":
   st.markdown(graph_one, unsafe_allow_html=True)
 
   # Define conditions and filter the data accordingly
-  conditions = {
+  graph_one_conditions = {
       "High Blood Pressure": data[data["Sodium"] < 150],
       "Diabetes": data[data["Total Carbohydrate"] < 30],
       "Low Calorie": data[data["Calorie"] < 100],
       "Low Blood Pressure": data[data["Cholesterol"] < 150]
   }
 
-  # Count the number of recipes for each condition
-  recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
-
-  # Extract conditions and counts
-  conditions = list(recipe_counts.keys())
-  recipe_counts = list(recipe_counts.values())
-
   # Define colors for each condition
   colors = ["skyblue", "salmon", "lightgreen", "orange"]  
 
-  # Plot the bar chart
-  with st.markdown("### Number of Recipes for Different Health Conditions"):
-      fig, ax = plt.subplots()
-      ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
-      ax.set_xlabel("Health Condition")
-      ax.set_ylabel("Number of Recipes")
-      ax.set_title(" ")
-      st.pyplot(fig)
+  # Call to plot the bar chart for recipe counts
+  plot_graph_one(graph_one_conditions, data, colors)
       
   # Conditions for the second graph
-  conditions = {
+  graph_two_conditions = {
       "High Blood Pressure": "Sodium < 150",
       "Diabetes": "Total Carbohydrate < 30",
       "Low Calorie": "Calorie < 100",
@@ -154,10 +159,10 @@ if choice == "Main":
   }
 
   # Define colors for bars
-  colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
-    
+  # colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']  
+  
   # Call for ploting Recipe categories based on Health conditions charts
-  plot_graph_two(conditions, data, colors)  
+  plot_graph_two(graph_two_conditions, data, colors)  
     
   # # Explanation text for the second graph
   # st.markdown("""
