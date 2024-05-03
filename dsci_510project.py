@@ -113,7 +113,7 @@ for condition, count in zip(conditions, recipe_counts):
         ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
         ax.set_xlabel("Health Condition")
         ax.set_ylabel("Number of Recipes")
-        ax.set_title(f"#### The below plot shows the number of recipes that the Recipe Finder will recommend for {condition} Health Condition.")
+        ax.set_title(f"The below plot shows the number of recipes that the Recipe Finder will recommend for {condition} Health Condition.", fontsize=20)
         ax.grid(True)
         st.pyplot(fig)
 
