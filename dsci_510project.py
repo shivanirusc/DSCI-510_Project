@@ -31,7 +31,6 @@ def dataset_description():
     - Recipe Category: This column categorizes each recipe as vegetarian, non-vegetarian, or vegan. It provides insights into the dietary preferences and restrictions associated with each recipe, allowing users to filter recipes based on their dietary choices.
     """)
     st.markdown("""
-    #### **8. Dataset Description**
     - **DATA SOURCE 1:**
     Dataset name: Epicurious - Recipes with Rating and Nutrition
 
