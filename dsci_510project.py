@@ -152,6 +152,7 @@ Instructions for using the app:
 - Select the type of meal.
 - Click the submit button to view the results.""")
 import streamlit.components.v1 as components
+import urllib.request
 
 st.title("Recipe Filter")
 
@@ -159,6 +160,10 @@ st.title("Recipe Filter")
 if st.button("Open Recipe Filter App"):
     st.markdown("Loading...")
 
-    # Embed the Streamlit app from GitHub using an iframe
-    url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
-    components.iframe(url)
+    # Import the Streamlit app file from GitHub
+    url = "https://raw.githubusercontent.com/shivanirusc/DSCI-510_Project/main/recipe_filter_app.py"
+    response = urllib.request.urlopen(url)
+    code = response.read().decode()
+
+    # Execute the code
+    exec(code)
