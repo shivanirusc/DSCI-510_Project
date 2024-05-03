@@ -320,4 +320,4 @@ elif choice == "Recipe Finder":
             filtered_data = filtered_data.head(10)
             st.table(filtered_data) 
 elif choice == "Dataset Description":
-    dataset_description()  # Call the function for the "Dataset Description" tab
+    dataset_description()  # Call the function for the Dataset Description tab
