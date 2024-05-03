@@ -248,8 +248,8 @@ elif choice == "Recipe Finder":
     # Display background image
     st.image(background_image, use_column_width=True)
 
-    # Section for user input
-    st.subheader("Enter Your Preferences")
+    # Sub-heading
+    st.markdown(""" #### **Enter Your Preferences** """)
 
     # Input fields for user preferences
     ingredient = st.text_input("Enter an ingredient", "")
