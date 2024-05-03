@@ -10,8 +10,8 @@ submission_text = """
 """
 # Define the text with increased font size
 team_member_text = """
-## **The name of team member:**  
-### Shivani Rajesh Shinde
+## **Student Name:**  
+ ##Shivani Rajesh Shinde
 """
 
 explanation_text = """
