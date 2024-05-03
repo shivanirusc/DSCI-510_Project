@@ -88,14 +88,6 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     ax.set_title(" ")
     st.pyplot(fig)
 
-# Define conditions
-conditions = {
-    "High Blood Pressure": data[data["Sodium"] < 150],
-    "Diabetes": data[data["Total Carbohydrate"] < 30],
-    "Low Calorie": data[data["Calorie"] < 100],
-    "Low Blood Pressure": data[data["Cholesterol"] < 150]
-}
-
 # Count the number of recipes for each condition
 recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
 
@@ -107,15 +99,14 @@ recipe_counts = list(recipe_counts.values())
 colors = ["skyblue", "salmon", "lightgreen", "orange"]  # You can define custom colors if needed
 
 # Plot
-for condition, count in zip(conditions, recipe_counts):
-    with st.markdown(f"### Number of Recipes for {condition} Health Condition"):
-        fig, ax = plt.subplots()
-        ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
-        ax.set_xlabel("Health Condition")
-        ax.set_ylabel("Number of Recipes")
-        ax.set_title(f"The below plot shows the number of recipes that the Recipe Finder will recommend for {condition} Health Condition.")
-        ax.grid(True)
-        st.pyplot(fig)
+with st.markdown("### Number of Recipes for Different Health Conditions"):
+    fig, ax = plt.subplots()
+    ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
+    ax.set_xlabel("Health Condition")
+    ax.set_ylabel("Number of Recipes")
+    ax.set_title(" ")
+    ax.grid(True)
+    st.pyplot(fig)
 
 # Function to classify recipe categories
 def classify_recipe(row):
