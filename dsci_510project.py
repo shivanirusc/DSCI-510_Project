@@ -8,11 +8,12 @@ import matplotlib.pyplot as plt
 submission_text = """
 <h1><b>DSCI 510: Spring 2024 Final Project Submission</b></h1>
 """
-# Define the text with increased font size
+# Define the text with increased font size for team member details
 team_member_text = """
 ### **Name: Shivani Rajesh Shinde**  
 """
 
+# Explanation of how to use the web app
 explanation_text = """
 #### **1. An explanation of how to use my webapp:**  
 This project requires the following packages:
@@ -44,15 +45,18 @@ Key features of the Recipe Finder web app include:
 Upon submission of these preferences, the app generates a list of 10 recipes along with their respective ingredients, providing users with cooking options tailored to their needs.
 
 """
+
 # Render the text in Streamlit app
-st.markdown(submission_text,unsafe_allow_html=True)
-# Display the text with increased font size
+st.markdown(submission_text, unsafe_allow_html=True)
+# Display the text with increased font size for team member details
 st.markdown(team_member_text, unsafe_allow_html=True)
+# Explanation of how to use the web app
 st.markdown(explanation_text, unsafe_allow_html=True)
 
 # Load the CSV data
 data = pd.read_csv("updated_recipe_data.csv")
 
+# Explanation text for the first graph
 graph_one = """
 ##### **1. Number of Recipes for Different Conditions**
 
@@ -60,8 +64,7 @@ The plot visualizes the number of recipes available for different health conditi
 """
 st.markdown(graph_one, unsafe_allow_html=True)
 
-
-# Define conditions
+# Define conditions and filter the data accordingly
 conditions = {
     "High Blood Pressure": data[data["Sodium"] < 150],
     "Diabetes": data[data["Total Carbohydrate"] < 30],
@@ -77,9 +80,9 @@ conditions = list(recipe_counts.keys())
 recipe_counts = list(recipe_counts.values())
 
 # Define colors for each condition
-colors = ["skyblue", "salmon", "lightgreen", "orange"]  # You can define custom colors if needed
+colors = ["skyblue", "salmon", "lightgreen", "orange"]  
 
-# Plot
+# Plot the bar chart
 with st.markdown("### Number of Recipes for Different Health Conditions"):
     fig, ax = plt.subplots()
     ax.bar(conditions, recipe_counts, color=colors, edgecolor="black")
@@ -88,6 +91,7 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     ax.set_title(" ")
     st.pyplot(fig)
 
+# Explanation text for the second graph
 st.markdown("""
 ##### 2. Recipe categories based on Health conditions 
 This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
@@ -100,7 +104,7 @@ This plot consists of four bar charts, each representing the number of recipes r
 Each bar's height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
 """)
 
-# Conditions
+# Conditions for the second graph
 conditions = {
     "High Blood Pressure": "Sodium < 150",
     "Diabetes": "Total Carbohydrate < 30",
@@ -136,9 +140,10 @@ for condition, filter_condition in conditions.items():
         ax.set_ylabel("Recipe Count")
         ax.set_xlabel("Recipe Category")
         ax.set_title(f"Recipes for {condition} condition")
-        ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
+        ax.tick_params(axis='x', rotation=360)  
         st.pyplot(fig)
 
+# Explanation for the Recipe Filter section
 st.markdown("""
 ##### Recipe Filter
 Please click the button below to explore the live demonstration of the web app.
@@ -157,7 +162,7 @@ Click on Recipe Finder to open the app""")
 # Add a hyperlink to open the new app in a new page
 st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
 
-
+# Additional text regarding difficulties encountered and future expansions
 st.markdown("""
 #### **5. Difficulties Encountered in Completing the Project**
 
@@ -173,4 +178,4 @@ Having a better understanding of deployment techniques and DevOps practices coul
 - Implementing a multi-parameter approach to health condition filtering, allowing users to specify different health metrics such as total fats, sugar content, cholesterol levels, and more to refine their recipe search results.
 - Enabling users to include multiple key ingredients in their filtering criteria, enhancing the versatility of the search functionality and accommodating a wider range of culinary preferences and dietary needs.
 
-""")
+""") 
