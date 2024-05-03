@@ -77,10 +77,22 @@ recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition
 # Define colors for each condition
 colors = px.colors.qualitative.Plotly
 
-# Plotly chart with custom colors
-fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title=" ",
+# Plotly chart with custom colors and border
+fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions",
              color="Condition", color_discrete_sequence=colors)
-fig.update_layout(xaxis_title="Health Condition", yaxis_title="Number of Recipes")
+fig.update_layout(xaxis_title="Health Condition", yaxis_title="Number of Recipes", 
+                  bargap=0.1, # Adjust space between bars
+                  bargroupgap=0.2, # Adjust space between groups of bars
+                  paper_bgcolor="lightgray", # Set plot background color
+                  plot_bgcolor="white", # Set plot background color
+                  xaxis=dict(tickangle=45), # Rotate x-axis labels
+                  margin=dict(l=50, r=50, b=50, t=50), # Adjust margins
+                  showlegend=False, # Hide legend
+                  uniformtext_minsize=8, # Set minimum text size
+                  uniformtext_mode='hide', # Hide text if it doesn't fit
+                  hovermode="x unified" # Show hover information on both bars in grouped bar chart
+                 )
+fig.update_traces(marker_line_color='black', marker_line_width=1.5) # Add border to bars
 
 # Display the chart
 st.plotly_chart(fig)
