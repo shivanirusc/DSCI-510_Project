@@ -274,7 +274,7 @@ elif choice == "Recipe Finder":
 elif choice == "Dataset Description":
     st.title("Dataset Description")
     st.write("""
-    The data.csv file contains a comprehensive dataset of recipes along with various nutritional attributes and the recipe category. Here's a brief description of the columns:
+    The updated_recipe_data.csv file contains a comprehensive dataset of recipes along with various nutritional attributes and the recipe category. Here's a brief description of the columns:
     
     - Recipe Name: This column stores the names of the recipes included in the dataset. It serves as the primary identifier for each recipe.
     - Ingredients: This column lists the ingredients required to prepare each recipe. It provides insights into the components used in the recipe, allowing users to identify specific ingredients and dietary preferences.
