@@ -35,10 +35,12 @@ I adhered to the original plan outlined in milestone 1 and successfully achieved
 
 The dataset I utilized contains various attributes including Recipe names, Ingredients, Calcium, Calorie, Cholesterol, Dietary Fiber, Iron, Potassium, Protein, Saturated Fat, Sodium, Total Carbohydrate, Total Fat, and Vitamin C. Conducting research on nutritional aspects suitable for individuals with conditions such as High/Low Blood Pressure and Diabetes, or those seeking low-calorie options, I developed a web application.
 Key features of the Recipe Finder web app include:
-Users can select their preferred key ingredient for cooking.
-The option to specify any allergens or ingredients they wish to avoid.
-Selection of dish types such as soup, drink, meal, or dessert.
-Choice of recipe categories: Vegetarian, Non-vegetarian, or Vegan.
+
+-Users can select their preferred key ingredient for cooking.
+-The option to specify any allergens or ingredients they wish to avoid.
+-Selection of dish types such as soup, drink, meal, or dessert.
+-Choice of recipe categories: Vegetarian, Non-vegetarian, or Vegan.
+
 Upon submission of these preferences, the app generates a list of 10 recipes along with their respective ingredients, providing users with cooking options tailored to their needs.
 
 """
