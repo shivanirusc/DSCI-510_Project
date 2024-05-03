@@ -139,13 +139,26 @@ for condition, filter_condition in conditions.items():
         ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
         st.pyplot(fig)
 
-import streamlit.components.v1 as components
+st.markdown("""
+##### Recipe Filter
+Please click the button below to explore the live demonstration of the web app.
 
-st.title("Recipe Filter")
+Instructions for using the app:
 
-# Button to open the recipe filter app
+- Enter the key ingredient you wish to search recipes for.
+- If there are any ingredients you wish to avoid, enter them in the respective field. If there are no restricted ingredients, simply enter "None".
+- Select the recipe category.
+- Choose any relevant health conditions.
+- Select the type of meal.
+- Click the submit button to view the results.""")
 if st.button("Open Recipe Filter App"):
     st.markdown("Loading...")
-    url = "https://share.streamlit.io/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
-    components.iframe(url)
-    # url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
+
+    # Import the Streamlit app file from GitHub
+    import urllib.request
+    url = "https://raw.githubusercontent.com/yourusername/yourrepository/recipe_filter_app.py"
+    response = urllib.request.urlopen(url)
+    code = response.read().decode()
+
+    # Execute the code
+    exec(code)
