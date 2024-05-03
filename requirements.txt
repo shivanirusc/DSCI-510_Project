@@ -1,6 +1,6 @@
-pandas
-streamlit
-plotly
-matplotlib
-seaborn
-urllib3
+streamlit==1.6.0
+pandas==1.2.3
+matplotlib==3.4.0
+numpy==1.20.1
+plotly==4.14.3
+urllib3==1.26.7
