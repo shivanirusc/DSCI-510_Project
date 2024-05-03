@@ -16,7 +16,7 @@ team_member_text = """
 explanation_text = """
 #### **1. An explanation of how to use my webapp:**  
 This project requires the following packages:
-- numpy, pandas, streamlit, requests, re (Python RegEx), and beautifulsoup (python version: 3.11.5)  
+- numpy, pandas, streamlit, requests, re (Python RegEx), plotly, matplotlib, seaborn and beautifulsoup (python version: 3.11.5)  
 To visualize this project, ensure that the required packages mentioned above are installed. Next, clone the repository from the following [GitHub Repository](https://github.com/shivanirusc/DSCI-510_Project). Once the repository is cloned, execute this notebook to visualize the project.  
 You can use `allrecipe_scrapper.py`, `epicurious_data.py`, and `spoonacular_data.py` added separately to the GitHub repository to check their functions and scrap all data, or alternatively, you can directly use the CSV dataset stored in `updated_recipe_data.csv` to test the results.
 
