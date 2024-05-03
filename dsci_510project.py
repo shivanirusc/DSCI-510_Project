@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
+import streamlit.components.v1 as components
+import urllib.request
 
 # Define the text data
 submission_text = """
@@ -151,10 +153,6 @@ Instructions for using the app:
 - Choose any relevant health conditions.
 - Select the type of meal.
 - Click the submit button to view the results.""")
-import streamlit.components.v1 as components
-import urllib.request
-
-st.title("Recipe Filter")
 
 # Button to open the recipe filter app
 if st.button("Open Recipe Filter App"):
