@@ -54,7 +54,7 @@ st.markdown(explanation_text, unsafe_allow_html=True)
 data = pd.read_csv("updated_recipe_data.csv")
 
 graph_one = """
-#### **Number of Recipes for Different Conditions**
+###### **Number of Recipes for Different Conditions**
 
 The plot visualizes the number of recipes available for different health conditions, providing insights into the distribution of recipes based on specific health criteria. 
 """
@@ -89,7 +89,7 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     st.pyplot(fig)
 
 st.markdown("""
-## Description:
+##### Recipe categories based on Health conditions 
 This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
 
 - **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
