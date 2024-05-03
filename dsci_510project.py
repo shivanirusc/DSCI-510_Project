@@ -30,6 +30,17 @@ The primary focus of my research was:
 - Providing recipe recommendations tailored to the user's desired food preferences while accommodating any dietary restrictions they may have.  
 - Ensuring that users receive recipes suitable for their specific health conditions.  
 I adhered to the original plan outlined in milestone 1 and successfully achieved the expected results.
+
+#### **4. What did you Discover/what were your conclusions ?**
+
+The dataset I utilized contains various attributes including Recipe names, Ingredients, Calcium, Calorie, Cholesterol, Dietary Fiber, Iron, Potassium, Protein, Saturated Fat, Sodium, Total Carbohydrate, Total Fat, and Vitamin C. Conducting research on nutritional aspects suitable for individuals with conditions such as High/Low Blood Pressure and Diabetes, or those seeking low-calorie options, I developed a web application.
+Key features of the Recipe Finder web app include:
+Users can select their preferred key ingredient for cooking.
+The option to specify any allergens or ingredients they wish to avoid.
+Selection of dish types such as soup, drink, meal, or dessert.
+Choice of recipe categories: Vegetarian, Non-vegetarian, or Vegan.
+Upon submission of these preferences, the app generates a list of 10 recipes along with their respective ingredients, providing users with cooking options tailored to their needs.
+
 """
 # Render the text in Streamlit app
 st.markdown(submission_text,unsafe_allow_html=True)
