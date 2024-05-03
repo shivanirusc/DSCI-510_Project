@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load data
 data = pd.read_csv("updated_recipe_data.csv")
@@ -66,7 +68,7 @@ allergy_ingredients = st.text_input("Enter allergy or restricted ingredients (co
 allergy_ingredients_list = [ingredient.strip() for ingredient in allergy_ingredients.split(',')]
 category = st.multiselect("Select recipe category", ["Vegetarian", "Non-Vegetarian", "Vegan"])
 health_conditions = st.multiselect("Select health conditions", ["Diabetes", "Low Blood Pressure", "High Blood Pressure", "Low Calorie"])
-sweet_or_drink = st.multiselect("Select sweet or drink or soup or meal", ["Sweet Dish", "Drink", "Meal", "Soup"])
+sweet_or_drink = st.multiselect("Select Meal Type", ["Sweet Dish", "Drink", "Meal", "Soup"])
 
 # Filter button
 if st.button("Find Recipes"):
@@ -75,4 +77,17 @@ if st.button("Find Recipes"):
     if filtered_data.empty:
         st.write("No recipes found matching the criteria.")
     else:
+        # Restrict the resulting recipes to 10
+        filtered_data = filtered_data.head(10)
         st.table(filtered_data)
+        
+        # Plotting the top 10 recipe categories
+        plt.figure(figsize=(10, 6))
+        sns.countplot(y=filtered_data["Recipe Name"], palette="viridis")
+        plt.title("Top 10 Recipe Categories", fontsize=16)
+        plt.xlabel("Recipe Count", fontsize=14)
+        plt.ylabel("Recipe Name", fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
+        plt.tight_layout()
+        st.pyplot()
