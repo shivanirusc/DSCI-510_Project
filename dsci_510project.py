@@ -86,7 +86,6 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     ax.set_xlabel("Health Condition")
     ax.set_ylabel("Number of Recipes")
     ax.set_title(" ")
-    ax.grid(True)
     st.pyplot(fig)
 
 # Conditions
