@@ -177,7 +177,7 @@ if choice == "Main":
   - **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
   - **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
 
-  Each bar's height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
+  Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
   """)
 
   # Conditions for the second graph
