@@ -82,10 +82,15 @@ if choice == "Main":
   #### **2. Any major “gotchas” to the code?**
   The API key utilized to access the Spoonacular API is unique to my account. Therefore, if someone wishes to use this program, they must generate their own Rapid API Key. The link to obtain the key is provided: [RapidAPI](https://rapidapi.com/spoonacular/api/recipe-food-nutrition). Please note that the free version of the API allows only 50 requests.  
   The scope of the research is currently limited to examining health conditions such as High and Low Blood Pressure, Diabetes, or Low-calorie diets. However, there is potential to expand the research by including additional health issues for more comprehensive results.  
-  As you progress through the app, I have provided clear instructions for interactive use by the grader.
+  As you progress through the app, I have provided clear instructions for interactive use by the grader."""
 
-  # Explanation for the Recipe Filter section
+  # Explanation for the Recipe Filter section 
   st.markdown("""
+  #### **3. What did you set out to study?**
+  The primary focus of my research was:  
+  - Providing recipe recommendations tailored to the user desired food preferences while accommodating any dietary restrictions they may have.  
+  - Ensuring that users receive recipes suitable for their specific health conditions.  
+  I adhered to the original plan outlined in milestone 1 and successfully achieved the expected results.
   ##### Recipe Filter
 
   Instructions for using the app:
@@ -104,12 +109,6 @@ if choice == "Main":
   st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
   
   st.markdown("""
-  #### **3. What did you set out to study?**
-  The primary focus of my research was:  
-  - Providing recipe recommendations tailored to the user desired food preferences while accommodating any dietary restrictions they may have.  
-  - Ensuring that users receive recipes suitable for their specific health conditions.  
-  I adhered to the original plan outlined in milestone 1 and successfully achieved the expected results.
-
   #### **4. What did you Discover/what were your conclusions ?**
 
   The dataset I utilized contains various attributes including Recipe names, Ingredients, Calcium, Calorie, Cholesterol, Dietary Fiber, Iron, Potassium, Protein, Saturated Fat, Sodium, Total Carbohydrate, Total Fat, and Vitamin C. Conducting research on nutritional aspects suitable for individuals with conditions such as High/Low Blood Pressure and Diabetes, or those seeking low-calorie options, I developed a web application.
