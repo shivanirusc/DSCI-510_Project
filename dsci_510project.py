@@ -151,14 +151,14 @@ Instructions for using the app:
 - Choose any relevant health conditions.
 - Select the type of meal.
 - Click the submit button to view the results.""")
+import streamlit.components.v1 as components
+
+st.title("Recipe Filter")
+
+# Button to open the recipe filter app
 if st.button("Open Recipe Filter App"):
     st.markdown("Loading...")
 
-    # Import the Streamlit app file from GitHub
-    import urllib.request
+    # Embed the Streamlit app from GitHub using an iframe
     url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
-    response = urllib.request.urlopen(url)
-    code = response.read().decode()
-
-    # Execute the code
-    exec(code)
+    components.iframe(url)
