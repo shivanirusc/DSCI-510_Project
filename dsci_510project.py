@@ -93,6 +93,9 @@ conditions = {
     "Low Blood Pressure": "Cholesterol < 150"
 }
 
+# Define colors for bars
+colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
+
 # Plot bar charts for each condition
 for condition, filter_condition in conditions.items():
     # Filter data based on condition
@@ -114,11 +117,11 @@ for condition, filter_condition in conditions.items():
     # Plot bar chart with custom styling
     with st.markdown(f"### Recipes for {condition} condition"):
         fig, ax = plt.subplots()
-        ax.bar(recipe_categories, recipe_counts, color='skyblue', edgecolor='black')
+        ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
         ax.set_ylabel("Recipe Count")
         ax.set_xlabel("Recipe Category")
         ax.set_title(f"Recipes for {condition} condition")
-        ax.tick_params(axis='x', rotation=45)
+        ax.tick_params(axis='x', rotation=90)  # Rotate x-axis labels vertically
         st.pyplot(fig)
 
 # Function to classify recipe categories
