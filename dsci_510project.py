@@ -3,8 +3,6 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
-import streamlit.components.v1 as components
-import urllib.request
 
 # Define the text data
 submission_text = """
