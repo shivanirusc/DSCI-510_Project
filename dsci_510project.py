@@ -4,71 +4,49 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
+# Define a function to plot bar charts for each condition
+def plot_graph_two(conditions, data, colors):
+    for condition, filter_condition in conditions.items():
+        # Filter data based on condition
+        if condition == "High Blood Pressure":
+            filtered_data = data[data["Sodium"] < 150]
+        elif condition == "Diabetes":
+            filtered_data = data[data["Total Carbohydrate"] < 30]
+        elif condition == "Low Calorie":
+            filtered_data = data[data["Calorie"] < 100]
+        elif condition == "Low Blood Pressure":
+            filtered_data = data[data["Cholesterol"] < 150]
+
+        # Count recipes for each category
+        recipe_categories = filtered_data["Recipe Category"].unique()
+        recipe_counts = np.zeros(len(recipe_categories))
+        for i, category in enumerate(recipe_categories):
+            recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
+
+        # Plot bar chart with custom styling
+        with st.markdown(f"### Recipes for {condition} condition"):
+            fig, ax = plt.subplots()
+            ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
+            ax.set_ylabel("Recipe Count")
+            ax.set_xlabel("Recipe Category")
+            ax.set_title(f"Recipes for {condition} condition")
+            ax.tick_params(axis='x', rotation=360)
+            st.pyplot(fig)
+
 # Add sidebar menu for navigation
 menu = ["Main", "Recipe Finder", "Dataset Description"]  # Add "Dataset Description" option
 choice = st.sidebar.selectbox("Go to", menu)
 
-# Define function for the Dataset Description tab
-def dataset_description():
-    st.title("Dataset Description")
-    st.write("""
-    The data.csv file contains a comprehensive dataset of recipes along with various nutritional attributes and the recipe category. Here's a brief description of the columns:
-    
-    - Recipe Name: This column stores the names of the recipes included in the dataset. It serves as the primary identifier for each recipe.
-    - Ingredients: This column lists the ingredients required to prepare each recipe. It provides insights into the components used in the recipe, allowing users to identify specific ingredients and dietary preferences.
-    - Calcium: This attribute represents the calcium content present in each recipe. Calcium is an essential mineral for bone health and various bodily functions, and its presence in recipes is crucial for individuals looking to maintain adequate calcium intake.
-    - Calorie: The calorie column indicates the calorie content of each recipe. Calories are a measure of the energy provided by food and are important for individuals monitoring their daily calorie intake for weight management or health reasons.
-    - Cholesterol: This column denotes the cholesterol content in each recipe. Monitoring cholesterol intake is vital for individuals managing cholesterol levels to reduce the risk of heart disease and other cardiovascular conditions.
-    - Dietary Fiber: Dietary fiber is essential for digestive health and helps regulate bowel movements, reduce cholesterol levels, and control blood sugar levels. This column provides information on the dietary fiber content present in each recipe.
-    - Iron: Iron is a crucial mineral necessary for the formation of hemoglobin, which carries oxygen in the blood. The iron content in recipes is essential for individuals, particularly those at risk of iron deficiency or anemia.
-    - Potassium: Potassium plays a vital role in maintaining fluid balance, muscle contractions, and nerve signals. The potassium content in recipes is important for individuals seeking to maintain healthy blood pressure and overall cardiovascular health.
-    - Protein: Protein is an essential macronutrient that plays a key role in building and repairing tissues, supporting immune function, and providing energy. The protein content in recipes is valuable for individuals, especially those following specific dietary plans or seeking to meet protein requirements.
-    - Saturated Fat: Saturated fat is a type of fat found in various foods, and excessive consumption can contribute to heart disease and other health issues. Monitoring saturated fat intake is crucial for individuals aiming to maintain heart health and overall well-being.
-    - Sodium: Sodium is a mineral that regulates fluid balance and nerve function but excessive intake can lead to high blood pressure and other health problems. The sodium content in recipes is significant for individuals monitoring their sodium intake for heart health and blood pressure management.
-    - Total Carbohydrate: Carbohydrates are the body's primary source of energy, and monitoring carbohydrate intake is essential for individuals managing blood sugar levels or following specific dietary plans.
-    - Total Fat: Fat is an essential macronutrient that provides energy, supports cell growth, and helps absorb certain vitamins. The total fat content in recipes is valuable for individuals aiming to maintain a balanced diet and manage fat intake for overall health.
-    - Vitamin C: Vitamin C is an antioxidant that supports immune function, collagen synthesis, and wound healing. The presence of vitamin C in recipes is beneficial for individuals seeking to boost their immune system and overall health.
-    - Recipe Category: This column categorizes each recipe as vegetarian, non-vegetarian, or vegan. It provides insights into the dietary preferences and restrictions associated with each recipe, allowing users to filter recipes based on their dietary choices.
-    """)
-    st.markdown("""
-    - **DATA SOURCE 1:**
-    Dataset name: Epicurious - Recipes with Rating and Nutrition
-
-    URL for website or API: https://www.kaggle.com/datasets/hugodarwood/epirecipes/data
-
-    **Brief description of data/API:**
-
-    The Epicurious dataset contains a collection of recipes along with their ratings and nutrition information. It includes details such as recipe titles, ingredients, preparation methods, cooking time, ratings, and nutritional content. This dataset is suitable for various culinary analyses, recipe recommendation systems, and nutritional studies.
-
-    - **DATA SOURCE 2:**
-    **API: Spoonacular API**
-
-    URL for API documentation: https://spoonacular.com/food-api/docs
-
-    **Brief description:**
-
-    The Spoonacular API provides access to a range of food-related data, including ingredients, nutrition information, and more. It offers endpoints for searching and retrieving recipe information, analyzing recipes for nutrition. The API covers a wide variety of cuisines and dietary preferences, making it suitable for various food-related applications and analysis.
-
-    - **DATA SOURCE 3:**
-
-    URL for website to scrape or download: https://www.allrecipes.com/search
-
-    **Brief description:**
-
-    The website https://www.allrecipes.com/search provides a search interface for finding recipes. Users can search for recipes based on various criteria such as ingredients, dish type, nutritional values, and more. Each recipe listing typically includes the recipe name, ingredients, cooking instructions, user ratings, and sometimes nutritional information. The data available on this website represents a wide range of recipes contributed by users. It contains information about the ingredients required, the steps to prepare the dish and the nutritional values associated with every dish.
-    """) 
-
+# Main Screen consists of the writeup which covers all research questions
 if choice == "Main":
-  # Define the text data
   submission_text = """
   <h1><b>DSCI 510: Spring 2024 Final Project Submission</b></h1>
   """
-  # Define the text with increased font size for team member details
   team_member_text = """
   ### **Name: Shivani Rajesh Shinde**  
   """
 
-  # Explanation of how to use the web app
+  # Explanation of how to use the web app, Any major “gotchas” to the code? and What did you set out to study?
   explanation_text = """
   #### **1. An explanation of how to use my webapp:**  
   This project requires the following packages:
@@ -103,16 +81,17 @@ if choice == "Main":
   ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar
       """
 
-  # Render the text in Streamlit app
+  # Title of the Writeup
   st.markdown(submission_text, unsafe_allow_html=True)
-  # Display the text with increased font size for team member details
+  # Name of the student
   st.markdown(team_member_text, unsafe_allow_html=True)
   # Explanation of how to use the web app
   st.markdown(explanation_text, unsafe_allow_html=True)
   
-  # Add a hyperlink to open the new app in a new page
+  # Add a hyperlink to open the Recipe Finder app
   st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
-  
+
+  # Add What did you Discover/what were your conclusions ?
   st.markdown("""
   #### **4. What did you Discover/what were your conclusions ?**
 
@@ -165,20 +144,7 @@ if choice == "Main":
       ax.set_ylabel("Number of Recipes")
       ax.set_title(" ")
       st.pyplot(fig)
-
-  # Explanation text for the second graph
-  st.markdown("""
-  ##### 2. Recipe categories based on Health conditions 
-  This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
-
-  - **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
-  - **Diabetes:** The second bar chart illustrates the number of recipes suitable for individuals with diabetes.
-  - **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
-  - **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
-
-  Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
-  """)
-
+      
   # Conditions for the second graph
   conditions = {
       "High Blood Pressure": "Sodium < 150",
@@ -189,34 +155,61 @@ if choice == "Main":
 
   # Define colors for bars
   colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
+    
+  # Call for ploting Recipe categories based on Health conditions charts
+  plot_graph_two(conditions, data, colors)  
+    
+  # # Explanation text for the second graph
+  # st.markdown("""
+  # ##### 2. Recipe categories based on Health conditions 
+  # This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
 
-  # Plot bar charts for each condition
-  for condition, filter_condition in conditions.items():
-      # Filter data based on condition
-      if condition == "High Blood Pressure":
-          filtered_data = data[data["Sodium"] < 150]
-      elif condition == "Diabetes":
-          filtered_data = data[data["Total Carbohydrate"] < 30]
-      elif condition == "Low Calorie":
-          filtered_data = data[data["Calorie"] < 100]
-      elif condition == "Low Blood Pressure":
-          filtered_data = data[data["Cholesterol"] < 150]
+  # - **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
+  # - **Diabetes:** The second bar chart illustrates the number of recipes suitable for individuals with diabetes.
+  # - **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
+  # - **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
 
-      # Count recipes for each category
-      recipe_categories = filtered_data["Recipe Category"].unique()
-      recipe_counts = np.zeros(len(recipe_categories))
-      for i, category in enumerate(recipe_categories):
-          recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
+  # Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
+  # """)
 
-      # Plot bar chart with custom styling
-      with st.markdown(f"### Recipes for {condition} condition"):
-          fig, ax = plt.subplots()
-          ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
-          ax.set_ylabel("Recipe Count")
-          ax.set_xlabel("Recipe Category")
-          ax.set_title(f"Recipes for {condition} condition")
-          ax.tick_params(axis='x', rotation=360)  
-          st.pyplot(fig)
+  # # Conditions for the second graph
+  # conditions = {
+  #     "High Blood Pressure": "Sodium < 150",
+  #     "Diabetes": "Total Carbohydrate < 30",
+  #     "Low Calorie": "Calorie < 100",
+  #    "Low Blood Pressure": "Cholesterol < 150"
+  # }
+
+  # # Define colors for bars
+  # colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
+
+  # # Plot bar charts for each condition
+  # for condition, filter_condition in conditions.items():
+  #     # Filter data based on condition
+  #     if condition == "High Blood Pressure":
+  #         filtered_data = data[data["Sodium"] < 150]
+  #     elif condition == "Diabetes":
+  #         filtered_data = data[data["Total Carbohydrate"] < 30]
+  #     elif condition == "Low Calorie":
+  #         filtered_data = data[data["Calorie"] < 100]
+  #     elif condition == "Low Blood Pressure":
+  #         filtered_data = data[data["Cholesterol"] < 150]
+
+  #     # Count recipes for each category
+  #     recipe_categories = filtered_data["Recipe Category"].unique()
+  #     recipe_counts = np.zeros(len(recipe_categories))
+  #     for i, category in enumerate(recipe_categories):
+  #         recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
+
+  #     # Plot bar chart with custom styling
+  #     with st.markdown(f"### Recipes for {condition} condition"):
+  #         fig, ax = plt.subplots()
+  #         ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
+  #         ax.set_ylabel("Recipe Count")
+  #         ax.set_xlabel("Recipe Category")
+  #         ax.set_title(f"Recipes for {condition} condition")
+  #         ax.tick_params(axis='x', rotation=360)  
+  #         st.pyplot(fig)
 
   # Additional text regarding difficulties encountered and future expansions
   st.markdown("""
@@ -319,4 +312,50 @@ elif choice == "Recipe Finder":
             filtered_data = filtered_data.head(10)
             st.table(filtered_data) 
 elif choice == "Dataset Description":
-    dataset_description()  # Call the function for the Dataset Description tab
+    st.title("Dataset Description")
+    st.write("""
+    The data.csv file contains a comprehensive dataset of recipes along with various nutritional attributes and the recipe category. Here's a brief description of the columns:
+    
+    - Recipe Name: This column stores the names of the recipes included in the dataset. It serves as the primary identifier for each recipe.
+    - Ingredients: This column lists the ingredients required to prepare each recipe. It provides insights into the components used in the recipe, allowing users to identify specific ingredients and dietary preferences.
+    - Calcium: This attribute represents the calcium content present in each recipe. Calcium is an essential mineral for bone health and various bodily functions, and its presence in recipes is crucial for individuals looking to maintain adequate calcium intake.
+    - Calorie: The calorie column indicates the calorie content of each recipe. Calories are a measure of the energy provided by food and are important for individuals monitoring their daily calorie intake for weight management or health reasons.
+    - Cholesterol: This column denotes the cholesterol content in each recipe. Monitoring cholesterol intake is vital for individuals managing cholesterol levels to reduce the risk of heart disease and other cardiovascular conditions.
+    - Dietary Fiber: Dietary fiber is essential for digestive health and helps regulate bowel movements, reduce cholesterol levels, and control blood sugar levels. This column provides information on the dietary fiber content present in each recipe.
+    - Iron: Iron is a crucial mineral necessary for the formation of hemoglobin, which carries oxygen in the blood. The iron content in recipes is essential for individuals, particularly those at risk of iron deficiency or anemia.
+    - Potassium: Potassium plays a vital role in maintaining fluid balance, muscle contractions, and nerve signals. The potassium content in recipes is important for individuals seeking to maintain healthy blood pressure and overall cardiovascular health.
+    - Protein: Protein is an essential macronutrient that plays a key role in building and repairing tissues, supporting immune function, and providing energy. The protein content in recipes is valuable for individuals, especially those following specific dietary plans or seeking to meet protein requirements.
+    - Saturated Fat: Saturated fat is a type of fat found in various foods, and excessive consumption can contribute to heart disease and other health issues. Monitoring saturated fat intake is crucial for individuals aiming to maintain heart health and overall well-being.
+    - Sodium: Sodium is a mineral that regulates fluid balance and nerve function but excessive intake can lead to high blood pressure and other health problems. The sodium content in recipes is significant for individuals monitoring their sodium intake for heart health and blood pressure management.
+    - Total Carbohydrate: Carbohydrates are the body's primary source of energy, and monitoring carbohydrate intake is essential for individuals managing blood sugar levels or following specific dietary plans.
+    - Total Fat: Fat is an essential macronutrient that provides energy, supports cell growth, and helps absorb certain vitamins. The total fat content in recipes is valuable for individuals aiming to maintain a balanced diet and manage fat intake for overall health.
+    - Vitamin C: Vitamin C is an antioxidant that supports immune function, collagen synthesis, and wound healing. The presence of vitamin C in recipes is beneficial for individuals seeking to boost their immune system and overall health.
+    - Recipe Category: This column categorizes each recipe as vegetarian, non-vegetarian, or vegan. It provides insights into the dietary preferences and restrictions associated with each recipe, allowing users to filter recipes based on their dietary choices.
+    """)
+    st.markdown("""
+    - **DATA SOURCE 1:**
+    Dataset name: Epicurious - Recipes with Rating and Nutrition
+
+    URL for website or API: https://www.kaggle.com/datasets/hugodarwood/epirecipes/data
+
+    **Brief description of data/API:**
+
+    The Epicurious dataset contains a collection of recipes along with their ratings and nutrition information. It includes details such as recipe titles, ingredients, preparation methods, cooking time, ratings, and nutritional content. This dataset is suitable for various culinary analyses, recipe recommendation systems, and nutritional studies.
+
+    - **DATA SOURCE 2:**
+    **API: Spoonacular API**
+
+    URL for API documentation: https://spoonacular.com/food-api/docs
+
+    **Brief description:**
+
+    The Spoonacular API provides access to a range of food-related data, including ingredients, nutrition information, and more. It offers endpoints for searching and retrieving recipe information, analyzing recipes for nutrition. The API covers a wide variety of cuisines and dietary preferences, making it suitable for various food-related applications and analysis.
+
+    - **DATA SOURCE 3:**
+
+    URL for website to scrape or download: https://www.allrecipes.com/search
+
+    **Brief description:**
+
+    The website https://www.allrecipes.com/search provides a search interface for finding recipes. Users can search for recipes based on various criteria such as ingredients, dish type, nutritional values, and more. Each recipe listing typically includes the recipe name, ingredients, cooking instructions, user ratings, and sometimes nutritional information. The data available on this website represents a wide range of recipes contributed by users. It contains information about the ingredients required, the steps to prepare the dish and the nutritional values associated with every dish.
+    """) 
