@@ -127,17 +127,14 @@ for condition, filter_condition in conditions.items():
         ax.set_title(f"Recipes for {condition} condition")
         ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
         st.pyplot(fig)
-import streamlit as st
+
+import streamlit.components.v1 as components
+
+st.title("Recipe Filter")
 
 # Button to open the recipe filter app
 if st.button("Open Recipe Filter App"):
     st.markdown("Loading...")
-
-    # Import the Streamlit app file from GitHub
-    import urllib.request
-    url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
-    response = urllib.request.urlopen(url)
-    code = response.read().decode()
-
-    # Execute the code
-    exec(code)
+    url = "https://share.streamlit.io/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
+    components.iframe(url)
+    # url = "https://github.com/shivanirusc/DSCI-510_Project/blob/main/recipe_filter_app.py"
