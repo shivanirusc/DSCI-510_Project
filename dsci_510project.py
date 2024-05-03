@@ -88,6 +88,14 @@ with st.markdown("### Number of Recipes for Different Health Conditions"):
     ax.set_title(" ")
     st.pyplot(fig)
 
+# Define conditions
+conditions = {
+    "High Blood Pressure": data[data["Sodium"] < 150],
+    "Diabetes": data[data["Total Carbohydrate"] < 30],
+    "Low Calorie": data[data["Calorie"] < 100],
+    "Low Blood Pressure": data[data["Cholesterol"] < 150]
+}
+
 # Count the number of recipes for each condition
 recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
 
