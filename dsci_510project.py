@@ -5,7 +5,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 # Add sidebar menu for navigation
-menu = ["Main", "Recipe Filter", "Dataset Description"]  # Add "Dataset Description" option
+menu = ["Main", "Recipe Finder", "Dataset Description"]  # Add "Dataset Description" option
 choice = st.sidebar.selectbox("Go to", menu)
 
 # Define function for the Dataset Description tab
