@@ -82,10 +82,8 @@ if choice == "Main":
   #### **2. Any major “gotchas” to the code?**
   The API key utilized to access the Spoonacular API is unique to my account. Therefore, if someone wishes to use this program, they must generate their own Rapid API Key. The link to obtain the key is provided: [RapidAPI](https://rapidapi.com/spoonacular/api/recipe-food-nutrition). Please note that the free version of the API allows only 50 requests.  
   The scope of the research is currently limited to examining health conditions such as High and Low Blood Pressure, Diabetes, or Low-calorie diets. However, there is potential to expand the research by including additional health issues for more comprehensive results.  
-  As you progress through the app, I have provided clear instructions for interactive use by the grader."""
-
-  # Explanation for the Recipe Filter section 
-  st.markdown("""
+  As you progress through the app, I have provided clear instructions for interactive use by the grader.
+  
   #### **3. What did you set out to study?**
   The primary focus of my research was:  
   - Providing recipe recommendations tailored to the user desired food preferences while accommodating any dietary restrictions they may have.  
@@ -103,8 +101,15 @@ if choice == "Main":
   - Click the submit button to view the results.
 
   ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar
-      """)
+      """
 
+  # Render the text in Streamlit app
+  st.markdown(submission_text, unsafe_allow_html=True)
+  # Display the text with increased font size for team member details
+  st.markdown(team_member_text, unsafe_allow_html=True)
+  # Explanation of how to use the web app
+  st.markdown(explanation_text, unsafe_allow_html=True)
+  
   # Add a hyperlink to open the new app in a new page
   st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
   
@@ -122,13 +127,6 @@ if choice == "Main":
   Upon submission of these preferences, the app generates a list of 10 recipes along with their respective ingredients, providing users with cooking options tailored to their needs.
 
   """)
-
-  # Render the text in Streamlit app
-  st.markdown(submission_text, unsafe_allow_html=True)
-  # Display the text with increased font size for team member details
-  st.markdown(team_member_text, unsafe_allow_html=True)
-  # Explanation of how to use the web app
-  st.markdown(explanation_text, unsafe_allow_html=True)
 
   # Load the CSV data
   data = pd.read_csv("updated_recipe_data.csv")
