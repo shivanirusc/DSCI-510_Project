@@ -182,31 +182,39 @@ Having a better understanding of deployment techniques and DevOps practices coul
 
 """) 
 
-st.markdown("""
-#### **8. Dataset Description**
-- **DATA SOURCE 1:**
-Dataset name: Epicurious - Recipes with Rating and Nutrition
+# Define function for the new tab
+def dataset_description():
+    st.title("Dataset Description")
+    st.write("""
+    The data.csv file contains a comprehensive dataset of recipes along with various nutritional attributes and the recipe category. Here's a brief description of the columns:
+    
+    - Recipe Name: This column stores the names of the recipes included in the dataset. It serves as the primary identifier for each recipe.
+    - Ingredients: This column lists the ingredients required to prepare each recipe. It provides insights into the components used in the recipe, allowing users to identify specific ingredients and dietary preferences.
+    - Calcium: This attribute represents the calcium content present in each recipe. Calcium is an essential mineral for bone health and various bodily functions, and its presence in recipes is crucial for individuals looking to maintain adequate calcium intake.
+    - Calorie: The calorie column indicates the calorie content of each recipe. Calories are a measure of the energy provided by food and are important for individuals monitoring their daily calorie intake for weight management or health reasons.
+    - Cholesterol: This column denotes the cholesterol content in each recipe. Monitoring cholesterol intake is vital for individuals managing cholesterol levels to reduce the risk of heart disease and other cardiovascular conditions.
+    - Dietary Fiber: Dietary fiber is essential for digestive health and helps regulate bowel movements, reduce cholesterol levels, and control blood sugar levels. This column provides information on the dietary fiber content present in each recipe.
+    - Iron: Iron is a crucial mineral necessary for the formation of hemoglobin, which carries oxygen in the blood. The iron content in recipes is essential for individuals, particularly those at risk of iron deficiency or anemia.
+    - Potassium: Potassium plays a vital role in maintaining fluid balance, muscle contractions, and nerve signals. The potassium content in recipes is important for individuals seeking to maintain healthy blood pressure and overall cardiovascular health.
+    - Protein: Protein is an essential macronutrient that plays a key role in building and repairing tissues, supporting immune function, and providing energy. The protein content in recipes is valuable for individuals, especially those following specific dietary plans or seeking to meet protein requirements.
+    - Saturated Fat: Saturated fat is a type of fat found in various foods, and excessive consumption can contribute to heart disease and other health issues. Monitoring saturated fat intake is crucial for individuals aiming to maintain heart health and overall well-being.
+    - Sodium: Sodium is a mineral that regulates fluid balance and nerve function but excessive intake can lead to high blood pressure and other health problems. The sodium content in recipes is significant for individuals monitoring their sodium intake for heart health and blood pressure management.
+    - Total Carbohydrate: Carbohydrates are the body's primary source of energy, and monitoring carbohydrate intake is essential for individuals managing blood sugar levels or following specific dietary plans.
+    - Total Fat: Fat is an essential macronutrient that provides energy, supports cell growth, and helps absorb certain vitamins. The total fat content in recipes is valuable for individuals aiming to maintain a balanced diet and manage fat intake for overall health.
+    - Vitamin C: Vitamin C is an antioxidant that supports immune function, collagen synthesis, and wound healing. The presence of vitamin C in recipes is beneficial for individuals seeking to boost their immune system and overall health.
+    - Recipe Category: This column categorizes each recipe as vegetarian, non-vegetarian, or vegan. It provides insights into the dietary preferences and restrictions associated with each recipe, allowing users to filter recipes based on their dietary choices.
+    """)
 
-URL for website or API: https://www.kaggle.com/datasets/hugodarwood/epirecipes/data
+# Add sidebar menu for navigation
+menu = ["Main", "New", "Dataset Description"]  # Add "Dataset Description" option
+choice = st.sidebar.selectbox("Go to", menu)
 
-**Brief description of data/API:**
-
-The Epicurious dataset contains a collection of recipes along with their ratings and nutrition information. It includes details such as recipe titles, ingredients, preparation methods, cooking time, ratings, and nutritional content. This dataset is suitable for various culinary analyses, recipe recommendation systems, and nutritional studies.
-
-- **DATA SOURCE 2:**
-**API: Spoonacular API**
-
-URL for API documentation: https://spoonacular.com/food-api/docs
-
-**Brief description:**
-
-The Spoonacular API provides access to a range of food-related data, including ingredients, nutrition information, and more. It offers endpoints for searching and retrieving recipe information, analyzing recipes for nutrition. The API covers a wide variety of cuisines and dietary preferences, making it suitable for various food-related applications and analysis.
-
-- **DATA SOURCE 3:**
-
-URL for website to scrape or download: https://www.allrecipes.com/search
-
-**Brief description:**
-
-The website https://www.allrecipes.com/search provides a search interface for finding recipes. Users can search for recipes based on various criteria such as ingredients, dish type, nutritional values, and more. Each recipe listing typically includes the recipe name, ingredients, cooking instructions, user ratings, and sometimes nutritional information. The data available on this website represents a wide range of recipes contributed by users. It contains information about the ingredients required, the steps to prepare the dish and the nutritional values associated with every dish.
-""")
+# Display selected tab
+if choice == "Main":
+    st.title("Main Tab")
+    st.write("This is the main tab.")
+elif choice == "New":
+    st.title("New Tab")
+    st.write("This is the new tab.")
+elif choice == "Dataset Description":
+    dataset_description()  # Call the function for the "Dataset Description" tab
