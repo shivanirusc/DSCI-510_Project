@@ -149,7 +149,6 @@ for condition, filter_condition in conditions.items():
 # Explanation for the Recipe Filter section
 st.markdown("""
 ##### Recipe Filter
-Please click the button below to explore the live demonstration of the web app.
 
 Instructions for using the app:
 
@@ -160,7 +159,7 @@ Instructions for using the app:
 - Select the type of meal.
 - Click the submit button to view the results.
 
-Click on Recipe Finder to open the app""")
+###### Click on Recipe Finder to open the app""")
 
 # Add a hyperlink to open the new app in a new page
 st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
