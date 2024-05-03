@@ -97,11 +97,13 @@ if choice == "Main":
   - Select the type of meal.
   - Click the submit button to view the results.
 
-  ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar""")
+  ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar
+      """)
 
   # Add a hyperlink to open the new app in a new page
   st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
   
+  st.markdown("""
   #### **3. What did you set out to study?**
   The primary focus of my research was:  
   - Providing recipe recommendations tailored to the user desired food preferences while accommodating any dietary restrictions they may have.  
@@ -120,7 +122,7 @@ if choice == "Main":
 
   Upon submission of these preferences, the app generates a list of 10 recipes along with their respective ingredients, providing users with cooking options tailored to their needs.
 
-  """
+  """)
 
   # Render the text in Streamlit app
   st.markdown(submission_text, unsafe_allow_html=True)
