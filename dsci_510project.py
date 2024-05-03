@@ -14,18 +14,18 @@ team_member_text = """
 """
 
 explanation_text = """
-## **An explanation of how to use my webapp:**  
+#### **1. An explanation of how to use my webapp:**  
 This project requires the following packages:
 - numpy, pandas, streamlit, requests, re (Python RegEx), and beautifulsoup (python version: 3.11.5)  
 To visualize this project, ensure that the required packages mentioned above are installed. Next, clone the repository from the following [GitHub Repository](https://github.com/shivanirusc/DSCI-510_Project). Once the repository is cloned, execute this notebook to visualize the project.  
 You can use `allrecipe_scrapper.py`, `epicurious_data.py`, and `spoonacular_data.py` added separately to the GitHub repository to check their functions and scrap all data, or alternatively, you can directly use the CSV dataset stored in `updated_recipe_data.csv` to test the results.
 
-## **Any major “gotchas” to the code?**
+#### **2. Any major “gotchas” to the code?**
 The API key utilized to access the Spoonacular API is unique to my account. Therefore, if someone wishes to use this program, they must generate their own Rapid API Key. The link to obtain the key is provided: [RapidAPI](https://rapidapi.com/spoonacular/api/recipe-food-nutrition). Please note that the free version of the API allows only 50 requests.  
 The scope of the research is currently limited to examining health conditions such as High and Low Blood Pressure, Diabetes, or Low-calorie diets. However, there is potential to expand the research by including additional health issues for more comprehensive results.  
 As you progress through the app, I have provided clear instructions for interactive use by the grader.
 
-## **What did you set out to study?**
+#### **3. What did you set out to study?**
 The primary focus of my research was:  
 - Providing recipe recommendations tailored to the user's desired food preferences while accommodating any dietary restrictions they may have.  
 - Ensuring that users receive recipes suitable for their specific health conditions.  
