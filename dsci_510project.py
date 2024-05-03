@@ -121,7 +121,7 @@ for condition, filter_condition in conditions.items():
         ax.set_ylabel("Recipe Count")
         ax.set_xlabel("Recipe Category")
         ax.set_title(f"Recipes for {condition} condition")
-        ax.tick_params(axis='x', rotation=90)  # Rotate x-axis labels vertically
+        ax.tick_params(axis='x', rotation=360)  # Rotate x-axis labels vertically
         st.pyplot(fig)
 
 # Function to classify recipe categories
