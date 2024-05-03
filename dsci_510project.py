@@ -30,6 +30,34 @@ def dataset_description():
     - Vitamin C: Vitamin C is an antioxidant that supports immune function, collagen synthesis, and wound healing. The presence of vitamin C in recipes is beneficial for individuals seeking to boost their immune system and overall health.
     - Recipe Category: This column categorizes each recipe as vegetarian, non-vegetarian, or vegan. It provides insights into the dietary preferences and restrictions associated with each recipe, allowing users to filter recipes based on their dietary choices.
     """)
+    st.markdown("""
+    #### **8. Dataset Description**
+    - **DATA SOURCE 1:**
+    Dataset name: Epicurious - Recipes with Rating and Nutrition
+
+    URL for website or API: https://www.kaggle.com/datasets/hugodarwood/epirecipes/data
+
+    **Brief description of data/API:**
+
+    The Epicurious dataset contains a collection of recipes along with their ratings and nutrition information. It includes details such as recipe titles, ingredients, preparation methods, cooking time, ratings, and nutritional content. This dataset is suitable for various culinary analyses, recipe recommendation systems, and nutritional studies.
+
+    - **DATA SOURCE 2:**
+    **API: Spoonacular API**
+
+    URL for API documentation: https://spoonacular.com/food-api/docs
+
+    **Brief description:**
+
+    The Spoonacular API provides access to a range of food-related data, including ingredients, nutrition information, and more. It offers endpoints for searching and retrieving recipe information, analyzing recipes for nutrition. The API covers a wide variety of cuisines and dietary preferences, making it suitable for various food-related applications and analysis.
+
+    - **DATA SOURCE 3:**
+
+    URL for website to scrape or download: https://www.allrecipes.com/search
+
+    **Brief description:**
+
+    The website https://www.allrecipes.com/search provides a search interface for finding recipes. Users can search for recipes based on various criteria such as ingredients, dish type, nutritional values, and more. Each recipe listing typically includes the recipe name, ingredients, cooking instructions, user ratings, and sometimes nutritional information. The data available on this website represents a wide range of recipes contributed by users. It contains information about the ingredients required, the steps to prepare the dish and the nutritional values associated with every dish.
+    """) 
 
 if choice == "Main":
   # Define the text data
