@@ -81,6 +81,7 @@ fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
 
 # Display the chart
 st.plotly_chart(fig)
+st.markdown(graph_one, unsafe_allow_html=True)
 
 # Function to classify recipe categories
 def classify_recipe(row):
