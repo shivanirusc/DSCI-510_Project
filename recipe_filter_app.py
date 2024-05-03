@@ -80,14 +80,3 @@ if st.button("Find Recipes"):
         # Restrict the resulting recipes to 10
         filtered_data = filtered_data.head(10)
         st.table(filtered_data)
-        
-        # Plotting the top 10 recipe categories
-        plt.figure(figsize=(10, 6))
-        sns.countplot(y=filtered_data["Recipe Name"], palette="viridis")
-        plt.title("Top 10 Recipe Categories", fontsize=16)
-        plt.xlabel("Recipe Count", fontsize=14)
-        plt.ylabel("Recipe Name", fontsize=14)
-        plt.xticks(fontsize=12)
-        plt.yticks(fontsize=12)
-        plt.tight_layout()
-        st.pyplot()
