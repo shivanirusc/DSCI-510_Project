@@ -84,6 +84,24 @@ if choice == "Main":
   The scope of the research is currently limited to examining health conditions such as High and Low Blood Pressure, Diabetes, or Low-calorie diets. However, there is potential to expand the research by including additional health issues for more comprehensive results.  
   As you progress through the app, I have provided clear instructions for interactive use by the grader.
 
+  # Explanation for the Recipe Filter section
+  st.markdown("""
+  ##### Recipe Filter
+
+  Instructions for using the app:
+
+  - Enter the key ingredient you wish to search recipes for.
+  - If there are any ingredients you wish to avoid, enter them in the respective field. If there are no restricted ingredients, simply enter "None".
+  - Select the recipe category.
+  - Choose any relevant health conditions.
+  - Select the type of meal.
+  - Click the submit button to view the results.
+
+  ###### Click on Recipe Finder to open the app or you can Navigate to the Recipe Finder app using slider navigation bar""")
+
+  # Add a hyperlink to open the new app in a new page
+  st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
+  
   #### **3. What did you set out to study?**
   The primary focus of my research was:  
   - Providing recipe recommendations tailored to the user's desired food preferences while accommodating any dietary restrictions they may have.  
@@ -200,24 +218,6 @@ if choice == "Main":
           ax.set_title(f"Recipes for {condition} condition")
           ax.tick_params(axis='x', rotation=360)  
           st.pyplot(fig)
-
-  # Explanation for the Recipe Filter section
-  st.markdown("""
-  ##### Recipe Filter
-
-  Instructions for using the app:
-
-  - Enter the key ingredient you wish to search recipes for.
-  - If there are any ingredients you wish to avoid, enter them in the respective field. If there are no restricted ingredients, simply enter "None".
-  - Select the recipe category.
-  - Choose any relevant health conditions.
-  - Select the type of meal.
-  - Click the submit button to view the results.
-
-  ###### Click on Recipe Finder to open the app""")
-
-  # Add a hyperlink to open the new app in a new page
-  st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
 
   # Additional text regarding difficulties encountered and future expansions
   st.markdown("""
