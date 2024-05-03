@@ -76,7 +76,7 @@ recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition
 colors = px.colors.qualitative.Plotly
 
 # Plotly chart with custom colors
-fig = px.bar(recipe_counts_df, x="Health Condition", y="Recipe Count",
+fig = px.bar(recipe_counts_df, x="Health Condition", title=" ", y="Recipe Count",
              color="Condition", color_discrete_sequence=colors)
 fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
 
