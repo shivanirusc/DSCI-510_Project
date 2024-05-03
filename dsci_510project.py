@@ -4,6 +4,9 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 
+# Load the CSV data
+  data = pd.read_csv("updated_recipe_data.csv")
+
 # Define a function to plot the bar chart for recipe counts
 def plot_graph_one(conditions, data, colors):
     # Count the number of recipes for each condition
@@ -50,6 +53,54 @@ def plot_graph_two(conditions, data, colors):
             ax.set_title(f"Recipes for {condition} condition")
             ax.tick_params(axis='x', rotation=360)
             st.pyplot(fig)
+
+# Function to classify recipe categories
+    def classify_recipe(row):
+        # Check if the recipe name contains keywords to classify it into a category
+        if 'soup' in row['Recipe Name'].lower():
+            return 'Soup'
+        elif 'salad' in row['Recipe Name'].lower():
+            return 'Salad'
+        elif 'cup white sugar' in row['Ingredients'].lower() or 'cup brown sugar' in row['Ingredients'].lower():
+            return 'Sweet Dish'
+        elif 'fluid' in row['Ingredients'].lower():
+            return 'Drink'
+        else:
+            return 'Meal'
+
+    # Function to filter data based on user inputs
+    def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients):
+        # Make a copy of the original data
+        filtered_data = data.copy()
+    
+        # Filter by ingredient
+        if ingredient:
+            filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
+    
+        # Filter out recipes containing allergy ingredients
+        if allergy_ingredients:
+            for allergen in allergy_ingredients:
+                filtered_data = filtered_data[~filtered_data['Ingredients'].str.contains(allergen.strip(), case=False)]
+    
+        # Filter by recipe category
+        if category:
+            filtered_data = filtered_data[filtered_data["Recipe Category"].isin(category)]
+    
+        # Filter by health conditions
+        if health_conditions:
+            for condition in health_conditions:
+                if condition == "High Blood Pressure":
+                    filtered_data = filtered_data[filtered_data["Sodium"] < 150]  # Adjust threshold as needed
+                elif condition == "Diabetes":
+                    filtered_data = filtered_data[filtered_data["Total Carbohydrate"] < 30]  # Adjust threshold as needed
+                elif condition == "Low Calorie":
+                    filtered_data = filtered_data[filtered_data["Calorie"] < 100]  # Adjust threshold as needed
+    
+        # Filter by sweet or drink or soup or meal
+        if sweet_or_drink:
+            filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
+    
+        return filtered_data[['Recipe Name', 'Ingredients']]
 
 # Add sidebar menu for navigation
 menu = ["Main", "Recipe Finder", "Dataset Description"]  # Add "Dataset Description" option
@@ -125,9 +176,6 @@ if choice == "Main":
 
   """)
 
-  # Load the CSV data
-  data = pd.read_csv("updated_recipe_data.csv")
-
   # Explanation text for the first graph
   graph_one = """
   ##### **1. Number of Recipes for Different Conditions**
@@ -158,65 +206,23 @@ if choice == "Main":
      "Low Blood Pressure": "Cholesterol < 150"
   }
 
-  # Define colors for bars
-  # colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']  
+  # Explanation text for the second graph
+  st.markdown("""
+  ##### 2. Recipe categories based on Health conditions 
+  This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
+
+  - **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
+  - **Diabetes:** The second bar chart illustrates the number of recipes suitable for individuals with diabetes.
+  - **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
+  - **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
+
+  Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
+  """)
   
   # Call for ploting Recipe categories based on Health conditions charts
-  plot_graph_two(graph_two_conditions, data, colors)  
-    
-  # # Explanation text for the second graph
-  # st.markdown("""
-  # ##### 2. Recipe categories based on Health conditions 
-  # This plot consists of four bar charts, each representing the number of recipes recommended for a specific health condition:
+  plot_graph_two(graph_two_conditions, data, colors)   
 
-  # - **High Blood Pressure:** The first bar chart shows the number of recipes recommended for individuals with high blood pressure.
-  # - **Diabetes:** The second bar chart illustrates the number of recipes suitable for individuals with diabetes.
-  # - **Low Calorie:** The third bar chart depicts the count of recipes ideal for individuals on a low-calorie diet.
-  # - **Low Blood Pressure:** Finally, the fourth bar chart shows the number of recipes recommended for individuals with low blood pressure.
-
-  # Each bars height represents the number of recipes available in the respective category, providing a visual comparison of recipe availability tailored to different health conditions. The x-axis labels are rotated vertically for better readability, and the chart title specifies the health condition being considered.
-  # """)
-
-  # # Conditions for the second graph
-  # conditions = {
-  #     "High Blood Pressure": "Sodium < 150",
-  #     "Diabetes": "Total Carbohydrate < 30",
-  #     "Low Calorie": "Calorie < 100",
-  #    "Low Blood Pressure": "Cholesterol < 150"
-  # }
-
-  # # Define colors for bars
-  # colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
-
-  # # Plot bar charts for each condition
-  # for condition, filter_condition in conditions.items():
-  #     # Filter data based on condition
-  #     if condition == "High Blood Pressure":
-  #         filtered_data = data[data["Sodium"] < 150]
-  #     elif condition == "Diabetes":
-  #         filtered_data = data[data["Total Carbohydrate"] < 30]
-  #     elif condition == "Low Calorie":
-  #         filtered_data = data[data["Calorie"] < 100]
-  #     elif condition == "Low Blood Pressure":
-  #         filtered_data = data[data["Cholesterol"] < 150]
-
-  #     # Count recipes for each category
-  #     recipe_categories = filtered_data["Recipe Category"].unique()
-  #     recipe_counts = np.zeros(len(recipe_categories))
-  #     for i, category in enumerate(recipe_categories):
-  #         recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
-
-  #     # Plot bar chart with custom styling
-  #     with st.markdown(f"### Recipes for {condition} condition"):
-  #         fig, ax = plt.subplots()
-  #         ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
-  #         ax.set_ylabel("Recipe Count")
-  #         ax.set_xlabel("Recipe Category")
-  #         ax.set_title(f"Recipes for {condition} condition")
-  #         ax.tick_params(axis='x', rotation=360)  
-  #         st.pyplot(fig)
-
-  # Additional text regarding difficulties encountered and future expansions
+  # Add text regarding difficulties encountered and future expansions and What would you do next to expand or augment the project?
   st.markdown("""
   #### **5. Difficulties Encountered in Completing the Project**
 
@@ -233,59 +239,8 @@ if choice == "Main":
   - Enabling users to include multiple key ingredients in their filtering criteria, enhancing the versatility of the search functionality and accommodating a wider range of culinary preferences and dietary needs.
   """) 
 elif choice == "Recipe Finder":
-    # Load data
-    data = pd.read_csv("updated_recipe_data.csv")
-
     # Set the title of the Streamlit app
     st.title("Recipe Filter")
-
-    # Function to classify recipe categories
-    def classify_recipe(row):
-        # Check if the recipe name contains keywords to classify it into a category
-        if 'soup' in row['Recipe Name'].lower():
-            return 'Soup'
-        elif 'salad' in row['Recipe Name'].lower():
-            return 'Salad'
-        elif 'cup white sugar' in row['Ingredients'].lower() or 'cup brown sugar' in row['Ingredients'].lower():
-            return 'Sweet Dish'
-        elif 'fluid' in row['Ingredients'].lower():
-            return 'Drink'
-        else:
-            return 'Meal'
-
-    # Function to filter data based on user inputs
-    def filter_data(ingredient, category, health_conditions, sweet_or_drink, allergy_ingredients):
-        # Make a copy of the original data
-        filtered_data = data.copy()
-    
-        # Filter by ingredient
-        if ingredient:
-            filtered_data = filtered_data[filtered_data['Ingredients'].str.contains(f"\\b{ingredient}\\b", case=False, regex=True)]
-    
-        # Filter out recipes containing allergy ingredients
-        if allergy_ingredients:
-            for allergen in allergy_ingredients:
-                filtered_data = filtered_data[~filtered_data['Ingredients'].str.contains(allergen.strip(), case=False)]
-    
-        # Filter by recipe category
-        if category:
-            filtered_data = filtered_data[filtered_data["Recipe Category"].isin(category)]
-    
-        # Filter by health conditions
-        if health_conditions:
-            for condition in health_conditions:
-                if condition == "High Blood Pressure":
-                    filtered_data = filtered_data[filtered_data["Sodium"] < 150]  # Adjust threshold as needed
-                elif condition == "Diabetes":
-                    filtered_data = filtered_data[filtered_data["Total Carbohydrate"] < 30]  # Adjust threshold as needed
-                elif condition == "Low Calorie":
-                    filtered_data = filtered_data[filtered_data["Calorie"] < 100]  # Adjust threshold as needed
-    
-        # Filter by sweet or drink or soup or meal
-        if sweet_or_drink:
-            filtered_data = filtered_data[filtered_data.apply(classify_recipe, axis=1).isin(sweet_or_drink)]
-    
-        return filtered_data[['Recipe Name', 'Ingredients']]
 
     # Load background image
     background_image = 'https://i.imgur.com/AUtA6b0.jpeg'
