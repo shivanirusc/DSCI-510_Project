@@ -104,7 +104,7 @@ if choice == "Main":
   
   #### **3. What did you set out to study?**
   The primary focus of my research was:  
-  - Providing recipe recommendations tailored to the user's desired food preferences while accommodating any dietary restrictions they may have.  
+  - Providing recipe recommendations tailored to the user desired food preferences while accommodating any dietary restrictions they may have.  
   - Ensuring that users receive recipes suitable for their specific health conditions.  
   I adhered to the original plan outlined in milestone 1 and successfully achieved the expected results.
 
