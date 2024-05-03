@@ -60,39 +60,44 @@ The plot visualizes the number of recipes available for different health conditi
 """
 st.markdown(graph_one, unsafe_allow_html=True)
 
-# Define conditions
+# Conditions
 conditions = {
-    "High Blood Pressure": data[data["Sodium"] < 150],
-    "Diabetes": data[data["Total Carbohydrate"] < 30],
-    "Low Calorie": data[data["Calorie"] < 100],
-    "Low Blood Pressure": data[data["Cholesterol"] < 150]
+    "High Blood Pressure": "Sodium < 150",
+    "Diabetes": "Total Carbohydrate < 30",
+    "Low Calorie": "Calorie < 100",
+    "Low Blood Pressure": "Cholesterol < 150"
 }
 
-# Count the number of recipes for each condition
-recipe_counts = {condition: len(filtered_data) for condition, filtered_data in conditions.items()}
+# Define colors for bars
+colors = ['skyblue', 'salmon', 'lightgreen', 'lightcoral']
 
-# Create a DataFrame from the recipe counts
-recipe_counts_df = pd.DataFrame(list(recipe_counts.items()), columns=["Condition", "Recipe Count"])
+# Plot bar charts for each condition
+for condition, filter_condition in conditions.items():
+    # Filter data based on condition
+    if condition == "High Blood Pressure":
+        filtered_data = data[data["Sodium"] < 150]
+    elif condition == "Diabetes":
+        filtered_data = data[data["Total Carbohydrate"] < 30]
+    elif condition == "Low Calorie":
+        filtered_data = data[data["Calorie"] < 100]
+    elif condition == "Low Blood Pressure":
+        filtered_data = data[data["Cholesterol"] < 150]
 
-# Define colors for each condition
-colors = px.colors.qualitative.Plotly
+    # Count recipes for each category
+    recipe_categories = filtered_data["Recipe Category"].unique()
+    recipe_counts = np.zeros(len(recipe_categories))
+    for i, category in enumerate(recipe_categories):
+        recipe_counts[i] = filtered_data[filtered_data["Recipe Category"] == category].shape[0]
 
-# Plotly chart with custom colors
-fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions",
-             color="Condition", color_discrete_sequence=colors)
-
-# Update layout to add border around the graph only
-fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count",
-                  paper_bgcolor="white", plot_bgcolor="white",  # Set background color
-                  margin=dict(l=20, r=20, b=20, t=40),  # Adjust margins
-                  hovermode="x unified",  # Show hover information on both bars in grouped bar chart
-                  showlegend=False,  # Hide legend
-                  bordercolor="black",  # Set border color
-                  borderwidth=1,  # Set border width
-                  )
-
-# Display the chart
-st.plotly_chart(fig)
+    # Plot bar chart with custom styling
+    with st.markdown(f"### Recipes for {condition} condition"):
+        fig, ax = plt.subplots()
+        ax.bar(recipe_categories, recipe_counts, color=colors, edgecolor='black')
+        ax.set_ylabel("Recipe Count")
+        ax.set_xlabel("Recipe Category")
+        ax.set_title(f"Recipes for {condition} condition")
+        ax.tick_params(axis='x', rotation=90)  # Rotate x-axis labels vertically
+        st.pyplot(fig)
 
 # Conditions
 conditions = {
