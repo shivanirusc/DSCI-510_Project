@@ -253,3 +253,34 @@ for condition, filter_condition in conditions.items():
 
     # Plot bar chart with custom styling
     custom_bar_chart({condition: data_dict})
+def main():
+    # Check if session state has been initialized
+    if "show_screen1" not in st.session_state:
+        st.session_state.show_screen1 = True
+
+    # Define the function for the main screen
+    def main_screen():
+        st.write("This is the main screen.")
+        # Button to navigate to the other screen
+        if st.button("Go to Other Screen"):
+            st.session_state.show_screen1 = not st.session_state.show_screen1
+
+    # Define the function for the other screen
+    def other_screen():
+        st.write("This is the other screen.")
+        # Button to navigate back to the main screen
+        if st.button("Go Back"):
+            st.session_state.show_screen1 = not st.session_state.show_screen1
+
+    # Main function to run the app
+    def run_app():
+        if st.session_state.show_screen1:
+            main_screen()
+        else:
+            other_screen()
+
+    # Run the app
+    run_app()
+
+if __name__ == "__main__":
+    main()
