@@ -81,7 +81,7 @@ colors = px.colors.qualitative.Plotly
 # Plotly chart with custom colors
 fig = px.bar(recipe_counts_df, x="Condition", y="Recipe Count", title="Number of Recipes for Different Conditions",
              color="Condition", color_discrete_sequence=colors)
-fig.update_layout(xaxis_title="Condition", yaxis_title="Recipe Count")
+fig.update_layout(xaxis_title="Health Condition", yaxis_title="Number of Recipes")
 
 # Display the chart
 st.plotly_chart(fig)
