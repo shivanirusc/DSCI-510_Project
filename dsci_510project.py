@@ -234,7 +234,6 @@ if choice == "Main":
   - Expanding the range of health conditions included in the filtering criteria to provide users with a more comprehensive selection of dietary options tailored to various health concerns.
   - Implementing a multi-parameter approach to health condition filtering, allowing users to specify different health metrics such as total fats, sugar content, cholesterol levels, and more to refine their recipe search results.
   - Enabling users to include multiple key ingredients in their filtering criteria, enhancing the versatility of the search functionality and accommodating a wider range of culinary preferences and dietary needs.
-
   """) 
 elif choice == "Recipe Finder":
     # Load data
