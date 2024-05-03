@@ -5,7 +5,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 # Load the CSV data
-  data = pd.read_csv("updated_recipe_data.csv")
+data = pd.read_csv("updated_recipe_data.csv")
 
 # Define a function to plot the bar chart for recipe counts
 def plot_graph_one(conditions, data, colors):
