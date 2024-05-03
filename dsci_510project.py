@@ -152,19 +152,12 @@ Instructions for using the app:
 - Select the recipe category.
 - Choose any relevant health conditions.
 - Select the type of meal.
-- Click the submit button to view the results.""")
+- Click the submit button to view the results.
+Click on Recipe Finder to open the app""")
 
-# Button to open the recipe filter app
-if st.button("Open Recipe Filter App"):
-    st.markdown("Loading...")
+# Add a hyperlink to open the new app in a new page
+st.markdown("[Recipe Finder](https://recipefilterapp.streamlit.app/)", unsafe_allow_html=True)
 
-    # Import the Streamlit app file from GitHub
-    url = "https://raw.githubusercontent.com/shivanirusc/DSCI-510_Project/main/recipe_filter_app.py"
-    response = urllib.request.urlopen(url)
-    code = response.read().decode()
-
-    # Execute the code
-    exec(code)
 
 st.markdown("""
 #### **5. Difficulties Encountered in Completing the Project**
