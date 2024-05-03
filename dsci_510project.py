@@ -161,4 +161,15 @@ st.markdown("""
 #### **5. Difficulties Encountered in Completing the Project**
 
 I didn't encounter any specific difficulties in completing the project. However, I can imagine that some potential challenges might arise when dealing with data preprocessing, especially if the dataset is large or messy. Additionally, ensuring the accuracy and effectiveness of the filtering conditions for different health conditions could require some trial and error. Finally, integrating and deploying the Streamlit app might pose some challenges, especially if there are compatibility issues or if additional configurations are needed.
-"""
+
+#### **6. What skills did you wish you had while you were doing the project?**
+
+Having a better understanding of deployment techniques and DevOps practices could have helped streamline the deployment process of the Streamlit app and manage any infrastructure-related challenges more efficiently. Additionally, improving my proficiency in matplotlib would have been beneficial, as I found it time-consuming to arrange plot elements, especially when dealing with subplots. With more experience, I could have created plots more effectively and efficiently.
+
+#### **7. What would you do “next” to expand or augment the project?**
+
+- Expanding the range of health conditions included in the filtering criteria to provide users with a more comprehensive selection of dietary options tailored to various health concerns.
+- Implementing a multi-parameter approach to health condition filtering, allowing users to specify different health metrics such as total fats, sugar content, cholesterol levels, and more to refine their recipe search results.
+- Enabling users to include multiple key ingredients in their filtering criteria, enhancing the versatility of the search functionality and accommodating a wider range of culinary preferences and dietary needs.
+
+""")
